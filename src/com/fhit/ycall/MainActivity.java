@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.fhit.ycall.adapter.TabPagerAdapter;
 import com.fhit.ycall.customview.MViewPager;
 import com.fhit.ycall.fragment.DiscoveryFragment;
 import com.fhit.ycall.fragment.FavFragment;
