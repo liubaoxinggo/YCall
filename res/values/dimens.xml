@@ -15,5 +15,11 @@
     <dimen name="top_left_tv_left">12dp</dimen>
     <!-- 顶部布局左侧显示字体大小 -->
     <dimen name="top_left_tv_font_size">24sp</dimen>
+    <!-- 底部tab的字体大小 -->
+    <dimen name="bottom_tab_tv_font_size">18sp</dimen>
+    <!-- 底部布局的高度 -->
+    <dimen name="main_bottom_height_1">80dp</dimen>
+    <dimen name="main_bottom_height_2">60dp</dimen>
+    <dimen name="main_bottom_height_3">50dp</dimen>
 
 </resources>

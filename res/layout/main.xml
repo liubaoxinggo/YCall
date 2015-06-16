@@ -4,7 +4,52 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.fhit.ycall.MainActivity">
-	<include layout="@layout/top_layout"/>
-   
+    <LinearLayout
+        android:id="@+id/top" 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+		<include
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    layout="@layout/top_layout" />
+		<include
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent"
+		    layout="@layout/net_state" />
 
+    </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/top"
+        android:background="@color/blue" >
+        <View
+            android:id="@+id/flag_zhan_wei" 
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/main_bottom_height_3"
+            android:layout_alignParentBottom="true"/>
+		<com.fhit.ycall.customview.MViewPager
+		    android:id="@+id/content_viewpager"
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent"
+		    android:background="#77557799" 
+		    android:layout_above="@id/flag_zhan_wei"/>
+    </RelativeLayout>
+   	<LinearLayout 
+   	    android:id="@+id/bottom" 
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_bottom_height_1"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:gravity="bottom"
+        >
+	    <include
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        layout="@layout/bottom_layout" />
+
+   	</LinearLayout>
 </RelativeLayout>

@@ -13,36 +13,36 @@
         android:text="@string/app_name"
         android:textSize="@dimen/top_left_tv_font_size"
         android:textColor="@color/c_ffffffff"/>
-    <LinearLayout
-        android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
+	<RelativeLayout 
+	    android:id="@+id/top_right_layout_1"
+	    android:layout_width="48dp"
+	    android:layout_height="48dp"
 	    android:layout_alignParentRight="true"
-	    android:layout_marginRight="12dp" >
+	    android:layout_centerVertical="true"
+	    android:layout_marginRight="12dp">
 	    <ImageView 
-		    android:id="@+id/top_right_search"
-		    android:layout_width="32dp"
-		    android:layout_height="32dp"
-		    android:scaleType="centerInside"
-		    android:src="@android:drawable/ic_search_category_default"/>
-		<RelativeLayout 
-		    android:id="@+id/top_right_layout_1"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:layout_marginRight="12dp">
-		    <ImageView 
-		        android:layout_width="32dp"
-		        android:layout_height="32dp"
-		        android:scaleType="centerInside"
-		        android:src="@android:drawable/ic_dialog_email"/>
-		    <TextView 
-		        android:id="@+id/top_right_tv"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_alignParentRight="true"
-		        android:layout_alignParentTop="true"
-		        android:text="12"/>
-		</RelativeLayout>
-    </LinearLayout>
+	        android:layout_width="32dp"
+	        android:layout_height="32dp"
+	        android:layout_centerInParent="true"
+	        android:scaleType="centerInside"
+	        android:src="@android:drawable/ic_dialog_email"/>
+	    <TextView 
+	        android:id="@+id/top_right_tv"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentRight="true"
+	        android:layout_alignParentTop="true"
+	        android:text="12"/>
+	</RelativeLayout>
+    <ImageView 
+	    android:id="@+id/top_right_search"
+	    android:layout_width="32dp"
+	    android:layout_height="32dp"
+	    android:scaleType="centerInside"
+	    android:layout_alignParentRight="true"
+	    android:layout_centerVertical="true"
+	    android:layout_marginRight="72dp"
+	    android:src="@android:drawable/ic_search_category_default"/>
 </RelativeLayout>
 
 

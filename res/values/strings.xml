@@ -2,5 +2,11 @@
 <resources>
 
     <string name="app_name">悦呼</string>
+    <string name="net_state_disconnect_msg">断网状态，无法正常通话</string>
+    
+    <string name="fav">收藏</string>
+    <string name="relationship">关系</string>
+    <string name="discovery">发现</string>
+    <string name="me">我的</string>
 
 </resources>
