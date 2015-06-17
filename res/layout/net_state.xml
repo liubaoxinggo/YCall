@@ -2,12 +2,12 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:drawableLeft="@android:drawable/ic_dialog_alert"
+    android:drawableLeft="@drawable/net_disconnect_alert"
     android:drawablePadding="16dp"
     android:text="@string/net_state_disconnect_msg"
     android:textColor="@color/red"
     android:gravity="center_vertical"
-    android:background="@color/c_f6f6f6"
+    android:background="@color/net_state_bg"
     android:padding="8dp"
     android:id="@+id/net_state"/>
     

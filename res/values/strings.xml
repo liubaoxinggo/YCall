@@ -8,5 +8,11 @@
     <string name="relationship">关系</string>
     <string name="discovery">发现</string>
     <string name="me">我的</string>
-
+    
+    <string name="top_msg">消息</string>
+    <string name="top_search">搜索</string>
+    
+    <string name="no_fav">暂无收藏</string>
+    <string name="no_history">暂无通话记录</string>
+	
 </resources>

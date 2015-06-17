@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="48dp"
-    android:background="@color/green" >
+    android:layout_height="@dimen/top_h"
+    android:background="@color/top_bg" >
     <TextView 
         android:id="@+id/top_left_tv"
         android:layout_width="wrap_content"
@@ -15,34 +15,39 @@
         android:textColor="@color/c_ffffffff"/>
 	<RelativeLayout 
 	    android:id="@+id/top_right_layout_1"
-	    android:layout_width="48dp"
-	    android:layout_height="48dp"
+	    android:layout_width="@dimen/top_right_rl_size"
+	    android:layout_height="@dimen/top_right_rl_size"
 	    android:layout_alignParentRight="true"
 	    android:layout_centerVertical="true"
-	    android:layout_marginRight="12dp">
+	    android:layout_marginRight="12dp"
+	    >
 	    <ImageView 
-	        android:layout_width="32dp"
-	        android:layout_height="32dp"
+	        android:layout_width="@dimen/top_iv_size"
+	        android:layout_height="@dimen/top_iv_size"
 	        android:layout_centerInParent="true"
 	        android:scaleType="centerInside"
-	        android:src="@android:drawable/ic_dialog_email"/>
+	        android:src="@drawable/nav_message"/>
 	    <TextView 
 	        android:id="@+id/top_right_tv"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_alignParentRight="true"
 	        android:layout_alignParentTop="true"
-	        android:text="12"/>
+	        android:background="@drawable/unread_bg_small"
+	        android:textSize="@dimen/top_right_tv_unread_font_size"
+	        android:text="10+"
+	        android:visibility="visible"/>
 	</RelativeLayout>
-    <ImageView 
+    <ImageView
 	    android:id="@+id/top_right_search"
-	    android:layout_width="32dp"
-	    android:layout_height="32dp"
+	    android:layout_width="@dimen/top_iv_size"
+	    android:layout_height="@dimen/top_iv_size"
+	    
 	    android:scaleType="centerInside"
 	    android:layout_alignParentRight="true"
 	    android:layout_centerVertical="true"
 	    android:layout_marginRight="72dp"
-	    android:src="@android:drawable/ic_search_category_default"/>
+	    android:src="@drawable/nav_search"/>
 </RelativeLayout>
 
 

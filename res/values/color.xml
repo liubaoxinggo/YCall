@@ -4,14 +4,32 @@
     <color name="green">#00ff00</color>
     <color name="red">#ff0000</color>
     <color name="blue">#0000ff</color>
+    <!-- top -->
+    <color name="top_bg">#37B34A</color>
+    
+    <color name="new_msg_flag">#f00</color>
+    
+    <color name="net_state_bg">#FFF0ED</color>
+    <!-- 无视图是文字提示的颜色 -->
+    <color name="no_info">#a8a8a8</color>
+    
+    <!-- tab的字体颜色 -->
+    <color name="tab_tv_normal">#777777</color>
+    <color name="tab_tv_selected">#37B34A</color>
+    
+    <!-- 键盘输入框的数字颜色 -->
+    <color name="input_num">#37B34A</color>
     
     
-    <color name="tab_tv">#666666</color>
-    
+    <color name="center_content_bg">#eeeeee</color>
+    <color name="tab">#ffffff</color>
+    <!-- 分割线 的颜色 -->
+    <color name="line">#cccccc</color>
     
     
     <color name="c_ffffffff">#ffffffff</color>
     <color name="c_aa0000">#aa0000</color>
     <color name="c_f6f6f6">#f6f6f6</color>
+    <color name="c_f5f5f5">#f5f5f5</color>
     
 </resources>
