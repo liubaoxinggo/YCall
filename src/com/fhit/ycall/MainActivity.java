@@ -19,9 +19,11 @@ import com.fhit.ycall.adapter.TabPagerAdapter;
 import com.fhit.ycall.customview.MViewPager;
 import com.fhit.ycall.fragment.DiscoveryFragment;
 import com.fhit.ycall.fragment.FavFragment;
-import com.fhit.ycall.fragment.KeyboardFragment;
+import com.fhit.ycall.fragment.HistoryBaseFragment;
+import com.fhit.ycall.fragment.HistoryFragment;
 import com.fhit.ycall.fragment.MeFragment;
 import com.fhit.ycall.fragment.RelationshipFragment;
+import com.fhit.ycall.util.LogUtil;
 import com.fhit.ycall.util.ScreenUtils;
 
 public class MainActivity extends FragmentActivity implements OnClickListener{
@@ -32,13 +34,40 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 	private static final int INDEX_DICOVERY = 3;
 	private static final int INDEX_ME = 4;
 	
+	/**
+	 * 当currentIndex!=INDEX_KEYBOARD时
+	 */
+	public static final int KEYBOARD_STATE_COMM = 0;
+	/**
+	 * 当currentIndex==INDEX_KEYBOARD时，键盘处于【隐藏】状态，且键盘输入框内【无】数字内容
+	 */
+	public static final int KEYBOARD_STATE_NO_INPUT_HIDE = 1;
+	/**
+	 * 当currentIndex==INDEX_KEYBOARD时，键盘处于【显示】状态，且键盘输入框内【无】数字内容
+	 */
+	public static final int KEYBOARD_STATE_NO_INPUT_SHOW = 2;
+	/**
+	 * 当currentIndex==INDEX_KEYBOARD时，键盘处于【显示】状态，且键盘输入框内【有】数字内容
+	 */
+	public static final int KEYBOARD_STATE_CALL_SHOW = 3;
+	/**
+	 * 当currentIndex==INDEX_KEYBOARD时，键盘处于【隐藏】状态，且键盘输入框内【有】数字内容
+	 */
+	public static final int KEYBOARD_STATE_CALL_HIDE = 4;
+	
+	/**
+	 * 当前键盘tab的状态
+	 */
+	private int currentKeyboardState = KEYBOARD_STATE_NO_INPUT_SHOW;
+	 
 	private int currentIndex = INDEX_KEYBOARD;
 	//顶部相关控件
 	private TextView tvMsgCount;
 	private TextView netState;
 	//中间内容的相关的引用
 	private List<Fragment> fragments;
-	private Fragment fav,relationship,keyboard,discovery,me;
+	private Fragment fav,relationship,discovery,me;
+	private HistoryBaseFragment history;
 	private MViewPager mViewPager;
 	private TabPagerAdapter adapter;
 	//底部tab的相关控件
@@ -79,7 +108,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
     	
     	mViewPager = (MViewPager) findViewById(R.id.content_viewpager);
     	//可以控制MViewPager的左右滑动
-    	mViewPager.setScanScroll(true);
+    	mViewPager.setScanScroll(false);
     }
     /**
      * 添加监听器
@@ -103,14 +132,14 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
     	//初始化5个fragment
     	fav = new FavFragment();
     	relationship = new RelationshipFragment();
-    	keyboard = new KeyboardFragment();
+    	history = new HistoryFragment();
     	discovery = new DiscoveryFragment();
     	me = new MeFragment();
     	//将初始化的5个fragment加入list集合
     	fragments = new ArrayList<Fragment>();
     	fragments.add(fav);
     	fragments.add(relationship);
-    	fragments.add(keyboard);
+    	fragments.add(history);
     	fragments.add(discovery);
     	fragments.add(me);
     	//初始化adapter
@@ -130,8 +159,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 			setCurrentTab(INDEX_RELATIONSHIP);
 			break;
 		case R.id.tab_iv_keyboard:
-			netState.setVisibility(View.GONE);
-			setCurrentTab(INDEX_KEYBOARD);
+			handleClickKeyboardTab();
 			break;
 		case R.id.tab_3:
 			setCurrentTab(INDEX_DICOVERY);
@@ -149,8 +177,70 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 			break;
 		}
 	}
+	private void handleClickKeyboardTab(){
+		if(currentIndex == INDEX_KEYBOARD){
+//			LogUtil.i("infos", "MainActivity: keyboardState[3] = "+ currentKeyboardState);
+			switch (currentKeyboardState) {
+			case KEYBOARD_STATE_COMM://0
+				break;
+			case KEYBOARD_STATE_NO_INPUT_HIDE://1
+				currentKeyboardState = KEYBOARD_STATE_NO_INPUT_SHOW;
+				ivKeyboard.setImageResource(R.drawable.tab_iv_keyboard_3);
+				history.showKeyboard();
+				break;
+			case KEYBOARD_STATE_NO_INPUT_SHOW://2
+				currentKeyboardState = KEYBOARD_STATE_NO_INPUT_HIDE;
+				ivKeyboard.setImageResource(R.drawable.tab_iv_keyboard_2);
+				history.hideKeyboard(); 
+				break;
+			case KEYBOARD_STATE_CALL_HIDE://4
+				currentKeyboardState = KEYBOARD_STATE_CALL_SHOW;
+				ivKeyboard.setImageResource(R.drawable.tab_iv_keyboard_4);
+				history.showKeyboard();
+				break;
+			case KEYBOARD_STATE_CALL_SHOW://3//呼出
+				history.call();
+				break;
+			default:
+				break;
+			}
+//			LogUtil.i("infos", "MainActivity: currentKeyboardState = "+ currentKeyboardState);
+		}else{//从其他tab 切换到 keyboard时，应该恢复原来的状态
+			setCurrentTab(INDEX_KEYBOARD);
+			setKeyboardState(currentKeyboardState);
+		}
+	}
+	/**
+	 * 设置keyTab的图片
+	 * @param state
+	 */
+	public void setKeyboardState(int state){
+		currentKeyboardState = state;
+//		LogUtil.i("infos", "MainActivity: keyboardState[2] = "+ currentKeyboardState);
+		switch (currentKeyboardState) {
+		case KEYBOARD_STATE_COMM://0
+			ivKeyboard.setImageResource(R.drawable.tab_iv_keyboard_1);
+			break;
+		case KEYBOARD_STATE_NO_INPUT_HIDE://1
+			ivKeyboard.setImageResource(R.drawable.tab_iv_keyboard_2);
+			break;
+		case KEYBOARD_STATE_NO_INPUT_SHOW://2
+			ivKeyboard.setImageResource(R.drawable.tab_iv_keyboard_3);
+			break;
+		case KEYBOARD_STATE_CALL_SHOW://3
+			ivKeyboard.setImageResource(R.drawable.tab_iv_keyboard_4);
+			break;
+		case KEYBOARD_STATE_CALL_HIDE://4
+			ivKeyboard.setImageResource(R.drawable.tab_iv_keyboard_2);
+			break;
+
+		default:
+			break;
+		}
+	}
 	@SuppressLint("ResourceAsColor")
 	private void setCurrentTab(int cIndex){
+//		LogUtil.i("infos", "MainActivity: keyboardState[1] = "+ currentKeyboardState);
 		currentIndex = cIndex;
 		mViewPager.setCurrentItem(currentIndex);
 		switch (cIndex) {
@@ -186,7 +276,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 			ivRelationship.setImageResource(R.drawable.tab_iv2_normal);
 			ivDiscovery.setImageResource(R.drawable.tab_iv3_normal);
 			ivMe.setImageResource(R.drawable.tab_iv4_normal);
-			ivKeyboard.setImageResource(R.drawable.tab_iv_keyboard_2);
+			ivKeyboard.setImageResource(R.drawable.tab_iv_keyboard_3);
 			break;
 		case INDEX_DICOVERY:
 			tvFav.setTextColor(getResources().getColor(R.color.tab_tv_normal));
@@ -224,9 +314,10 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 		}
 		@Override
 		public void onPageSelected(int index) {
-			setCurrentTab(index);
+//			setCurrentTab(index);
 		}
 	} 
+	
 	void test(){
 //		ScreenUtils.getScreenSize(this);
 		System.out.println("60dp<----->"+ScreenUtils.dpToPx(this, 60)+"px");

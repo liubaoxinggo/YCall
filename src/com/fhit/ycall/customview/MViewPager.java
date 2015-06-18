@@ -40,16 +40,32 @@ public class MViewPager extends ViewPager {
 	}
 
 	@Override
+	public boolean dispatchTouchEvent(MotionEvent ev) {
+		// TODO Auto-generated method stub
+		return super.dispatchTouchEvent(ev);
+	}
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//必须重写下面的两个方法，当return false 时，ViewPager就不会消耗掉手指滑动的事件了，
+	//转而传递给上层View去处理或者该事件就直接终止了 
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////
+	@Override
 	public boolean onTouchEvent(MotionEvent e) {
 		// TODO Auto-generated method stub
 		if(isCanScroll){
 			return super.onTouchEvent(e);
 		}else{
-			return true;
+			return false;
 		}
-		
 	}
-	
+	@Override
+	public boolean onInterceptTouchEvent(MotionEvent e) {
+		// TODO Auto-generated method stub
+		if(isCanScroll){
+			return super.onInterceptTouchEvent(e);
+		}else{
+			return false;
+		}
+	}
 	
 
 

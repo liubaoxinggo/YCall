@@ -12,6 +12,8 @@
     <string name="top_msg">消息</string>
     <string name="top_search">搜索</string>
     
+    <string name="input_phone_number_et_hint">请输入电话号码</string>
+    
     <string name="no_fav">暂无收藏</string>
     <string name="no_history">暂无通话记录</string>
 	

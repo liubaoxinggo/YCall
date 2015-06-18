@@ -20,6 +20,8 @@
     <!-- 键盘输入框的数字颜色 -->
     <color name="input_num">#37B34A</color>
     
+    <color name="input_num_hint">#cccccc</color>
+    
     
     <color name="center_content_bg">#eeeeee</color>
     <color name="tab">#ffffff</color>
