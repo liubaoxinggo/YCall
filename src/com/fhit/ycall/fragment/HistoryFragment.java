@@ -50,6 +50,7 @@ public class HistoryFragment extends HistoryBaseFragment implements OnClickListe
 		initView(view);
 		addListener(view);
 		initData();
+		//隐藏系统键盘
 		FunctionUtil.setCursor(mContext, etPhoneNumber);
 		return view;
 	}
@@ -172,11 +173,10 @@ public class HistoryFragment extends HistoryBaseFragment implements OnClickListe
 				input(v.getTag().toString());
 			}*/
 //			keyboard.setVisibility(View.GONE);
-			//由3->4
-			hideKeyboard(MainActivity.KEYBOARD_ANIM_DURATION);
-			if(TextUtils.isEmpty(etPhoneNumber.getText().toString())){
+			//
+			if(TextUtils.isEmpty(etPhoneNumber.getText().toString())){//由2->1
 				setKeyboardState(MainActivity.KEYBOARD_STATE_NO_INPUT_HIDE);
-			}else{
+			}else{//由3->4
 				setKeyboardState(MainActivity.KEYBOARD_STATE_CALL_HIDE);
 			}
 			break;
@@ -229,6 +229,7 @@ public class HistoryFragment extends HistoryBaseFragment implements OnClickListe
 		case R.id.dialb:
 			if(e.getAction() == MotionEvent.ACTION_DOWN){
 				FunctionUtil.vibrate(mContext,15);
+//				FunctionUtil.vibrate(mContext,50);
 			}
 			break;
 		}
@@ -236,6 +237,10 @@ public class HistoryFragment extends HistoryBaseFragment implements OnClickListe
 	}
 	private void setKeyboardState(int state){
 		mContext.setKeyboardState(state);
+	}
+	@Override
+	public void call() {
+		ToastUtil.showLongToast("call");
 	}
 	@Override
 	public void hideKeyboard(long duration){
@@ -278,11 +283,7 @@ public class HistoryFragment extends HistoryBaseFragment implements OnClickListe
 		public void afterTextChanged(Editable s) {
 		}
 	};
-	@Override
-	public void call() {
-		ToastUtil.showLongToast("call");
-	}
-	AnimatorListener hideAnimatorListener = new AnimatorListener() {
+	private AnimatorListener hideAnimatorListener = new AnimatorListener() {
 		@Override
 		public void onAnimationStart(Animator arg0) {
 		}
@@ -301,7 +302,7 @@ public class HistoryFragment extends HistoryBaseFragment implements OnClickListe
 			
 		}
 	};
-	AnimatorListener showAnimatorListener = new AnimatorListener() {
+	private AnimatorListener showAnimatorListener = new AnimatorListener() {
 		@Override
 		public void onAnimationStart(Animator arg0) {
 			keyboard.setVisibility(View.VISIBLE);

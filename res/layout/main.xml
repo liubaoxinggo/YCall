@@ -57,5 +57,13 @@
 	        android:scaleType="centerInside"
 	        android:src="@drawable/tab_iv_keyboard_3"
 	        android:layout_centerInParent="true"/>
+	    <ImageView
+	        android:id="@+id/tab_iv_keyboard_1" 
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:scaleType="centerInside"
+	        android:src="@drawable/tab_iv_keyboard_3"
+	        android:layout_centerInParent="true"
+	        android:visibility="invisible"/>
    	</RelativeLayout>
 </RelativeLayout>

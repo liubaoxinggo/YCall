@@ -2,8 +2,10 @@ package com.fhit.ycall.util;
 
 import java.lang.reflect.Method;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Service;
+import android.os.Build;
 import android.os.Vibrator;
 import android.text.InputType;
 import android.view.WindowManager;
@@ -24,7 +26,7 @@ public class FunctionUtil {
 	 * 3.0以上的版本需另行方法
 	 */
 	public static void setCursor(Activity mContext,EditText etInput){
-		if (android.os.Build.VERSION.SDK_INT <= 10) {
+		if (android.os.Build.VERSION.SDK_INT <= Build.VERSION_CODES.GINGERBREAD_MR1) {
 			etInput.setInputType(InputType.TYPE_NULL);
 		} else {
 			mContext.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -44,17 +46,24 @@ public class FunctionUtil {
 	 * @param mContext
 	 * @param milliseconds
 	 */
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB) 
 	public static void vibrate(Activity mContext,long milliseconds){
-		((Vibrator)mContext.getSystemService(Service.VIBRATOR_SERVICE)).vibrate(milliseconds);
+		if(((Vibrator)mContext.getSystemService(Service.VIBRATOR_SERVICE)).hasVibrator()){
+			((Vibrator)mContext.getSystemService(Service.VIBRATOR_SERVICE)).vibrate(milliseconds);
+		}
+		
 	}
 	/**
-	 * 
+	 *  振动【需要权限 ：android.permission.VIBRATE】
 	 * @param mContext
 	 * @param pattern
 	 * @param repeat
 	 */
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB) 
 	public static void vibrate(Activity mContext,long[] pattern,int repeat){
-		((Vibrator)mContext.getSystemService(Service.VIBRATOR_SERVICE)).vibrate(pattern, repeat);
+		if(((Vibrator)mContext.getSystemService(Service.VIBRATOR_SERVICE)).hasVibrator()){
+			((Vibrator)mContext.getSystemService(Service.VIBRATOR_SERVICE)).vibrate(pattern, repeat);
+		}
 	}
 	
 }
