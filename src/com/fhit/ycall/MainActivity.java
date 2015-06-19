@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -25,6 +26,11 @@ import com.fhit.ycall.fragment.MeFragment;
 import com.fhit.ycall.fragment.RelationshipFragment;
 import com.fhit.ycall.util.LogUtil;
 import com.fhit.ycall.util.ScreenUtils;
+import com.nineoldandroids.animation.Animator;
+import com.nineoldandroids.animation.Animator.AnimatorListener;
+import com.nineoldandroids.animation.ObjectAnimator;
+import com.nineoldandroids.animation.ValueAnimator;
+import com.nineoldandroids.animation.ValueAnimator.AnimatorUpdateListener;
 
 public class MainActivity extends FragmentActivity implements OnClickListener{
 	
@@ -35,7 +41,11 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 	private static final int INDEX_ME = 4;
 	
 	/**
-	 * 当currentIndex!=INDEX_KEYBOARD时
+	 * 键盘和键盘Tab的动画的持续时间
+	 */
+	public static final long KEYBOARD_ANIM_DURATION = 500;
+	/**
+	 * 当currentIndex!=INDEX_KEYBOARD时,这是一种缺省状态
 	 */
 	public static final int KEYBOARD_STATE_COMM = 0;
 	/**
@@ -59,7 +69,9 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 	 * 当前键盘tab的状态
 	 */
 	private int currentKeyboardState = KEYBOARD_STATE_NO_INPUT_SHOW;
-	 
+	//当前keyboard的旋转的角度
+	private float currentKeyboardRotationX = 0;
+	
 	private int currentIndex = INDEX_KEYBOARD;
 	//顶部相关控件
 	private TextView tvMsgCount;
@@ -179,24 +191,72 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 	}
 	private void handleClickKeyboardTab(){
 		if(currentIndex == INDEX_KEYBOARD){
-//			LogUtil.i("infos", "MainActivity: keyboardState[3] = "+ currentKeyboardState);
+			LogUtil.i("infos", "MainActivity: keyboardState[3] = "+ currentKeyboardState);
 			switch (currentKeyboardState) {
 			case KEYBOARD_STATE_COMM://0
 				break;
-			case KEYBOARD_STATE_NO_INPUT_HIDE://1
+			case KEYBOARD_STATE_NO_INPUT_HIDE://1[由1->2]
 				currentKeyboardState = KEYBOARD_STATE_NO_INPUT_SHOW;
+//				ivKeyboard.setImageResource(R.drawable.tab_iv_keyboard_3);
+				ObjectAnimator oa2 = ObjectAnimator.ofFloat(ivKeyboard, "rotationX", 180f,0f).setDuration(KEYBOARD_ANIM_DURATION);
+				oa2.addListener(new AnimatorListener() {
+					@Override
+					public void onAnimationStart(Animator arg0) {
+					}
+					@Override
+					public void onAnimationRepeat(Animator arg0) {
+					}
+					@Override
+					public void onAnimationEnd(Animator arg0) {
+						ivKeyboard.setImageResource(R.drawable.tab_iv_keyboard_3);
+					}
+					@Override
+					public void onAnimationCancel(Animator arg0) {
+					}
+				});
 				ivKeyboard.setImageResource(R.drawable.tab_iv_keyboard_3);
-				history.showKeyboard();
+				oa2.start();
+				history.showKeyboard(KEYBOARD_ANIM_DURATION);
 				break;
-			case KEYBOARD_STATE_NO_INPUT_SHOW://2
+			case KEYBOARD_STATE_NO_INPUT_SHOW://2[由2->1]
 				currentKeyboardState = KEYBOARD_STATE_NO_INPUT_HIDE;
+//				ivKeyboard.setImageResource(R.drawable.tab_iv_keyboard_2);
+				ObjectAnimator oa1 = ObjectAnimator.ofFloat(ivKeyboard, "rotationX", -180f,0f).setDuration(KEYBOARD_ANIM_DURATION);
+				oa1.addListener(new AnimatorListener() {
+					@Override
+					public void onAnimationStart(Animator arg0) {
+					}
+					@Override
+					public void onAnimationRepeat(Animator arg0) {
+					}
+					@Override
+					public void onAnimationEnd(Animator arg0) {
+						ivKeyboard.setImageResource(R.drawable.tab_iv_keyboard_2);
+					}
+					@Override
+					public void onAnimationCancel(Animator arg0) {
+					}
+				});
 				ivKeyboard.setImageResource(R.drawable.tab_iv_keyboard_2);
-				history.hideKeyboard(); 
+				oa1.start();
+				history.hideKeyboard(KEYBOARD_ANIM_DURATION); 
 				break;
-			case KEYBOARD_STATE_CALL_HIDE://4
+			case KEYBOARD_STATE_CALL_HIDE://4[由4->3]
 				currentKeyboardState = KEYBOARD_STATE_CALL_SHOW;
-				ivKeyboard.setImageResource(R.drawable.tab_iv_keyboard_4);
-				history.showKeyboard();
+				history.showKeyboard(KEYBOARD_ANIM_DURATION);
+				ObjectAnimator oa = ObjectAnimator.ofFloat(ivKeyboard, "rotationX", 180f,0f).setDuration(KEYBOARD_ANIM_DURATION);
+				oa.addUpdateListener(new AnimatorUpdateListener() {
+					
+					@Override
+					public void onAnimationUpdate(ValueAnimator animation) {
+						// TODO Auto-generated method stub
+						Log.i("anim", "CurrentPlayTime="+animation.getCurrentPlayTime()+" / Duration="+animation.getDuration()+" / AnimatedValue="+animation.getAnimatedValue()); 
+						if((Float)animation.getAnimatedValue() < 90f){
+							ivKeyboard.setImageResource(R.drawable.tab_iv_keyboard_4);
+						}
+					}
+				});
+				oa.start();
 				break;
 			case KEYBOARD_STATE_CALL_SHOW://3//呼出
 				history.call();
@@ -204,7 +264,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 			default:
 				break;
 			}
-//			LogUtil.i("infos", "MainActivity: currentKeyboardState = "+ currentKeyboardState);
+			LogUtil.i("infos", "MainActivity: currentKeyboardState = "+ currentKeyboardState);
 		}else{//从其他tab 切换到 keyboard时，应该恢复原来的状态
 			setCurrentTab(INDEX_KEYBOARD);
 			setKeyboardState(currentKeyboardState);
@@ -215,29 +275,97 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 	 * @param state
 	 */
 	public void setKeyboardState(int state){
-		currentKeyboardState = state;
-//		LogUtil.i("infos", "MainActivity: keyboardState[2] = "+ currentKeyboardState);
-		switch (currentKeyboardState) {
+		LogUtil.i("infos", "MainActivity: currentKeyboardState[2] = "+ currentKeyboardState+"--->"+state);
+		switch (state) {
 		case KEYBOARD_STATE_COMM://0
 			ivKeyboard.setImageResource(R.drawable.tab_iv_keyboard_1);
 			break;
 		case KEYBOARD_STATE_NO_INPUT_HIDE://1
-			ivKeyboard.setImageResource(R.drawable.tab_iv_keyboard_2);
+			if(currentKeyboardState == KEYBOARD_STATE_NO_INPUT_SHOW){//由2->1
+				ObjectAnimator oa1 = ObjectAnimator.ofFloat(ivKeyboard, "rotationX", -180f,0f).setDuration(KEYBOARD_ANIM_DURATION);
+				oa1.addListener(new AnimatorListener() {
+					@Override
+					public void onAnimationStart(Animator arg0) {
+					}
+					@Override
+					public void onAnimationRepeat(Animator arg0) {
+					}
+					@Override
+					public void onAnimationEnd(Animator arg0) {
+						ivKeyboard.setImageResource(R.drawable.tab_iv_keyboard_2);
+					}
+					@Override
+					public void onAnimationCancel(Animator arg0) {
+					}
+				});
+				ivKeyboard.setImageResource(R.drawable.tab_iv_keyboard_2);
+				oa1.start();
+				history.hideKeyboard(KEYBOARD_ANIM_DURATION); 
+			}else{
+				ivKeyboard.setImageResource(R.drawable.tab_iv_keyboard_2);
+			}
 			break;
 		case KEYBOARD_STATE_NO_INPUT_SHOW://2
-			ivKeyboard.setImageResource(R.drawable.tab_iv_keyboard_3);
+			if(currentKeyboardState == KEYBOARD_STATE_CALL_SHOW){//由3->2
+				ObjectAnimator oa = ObjectAnimator.ofFloat(ivKeyboard, "alpha", 1.0f,0.1f,01f,1f).setDuration(KEYBOARD_ANIM_DURATION);
+				oa.addUpdateListener(new AnimatorUpdateListener() {
+					
+					@Override
+					public void onAnimationUpdate(ValueAnimator animation) {
+						if((Float)animation.getAnimatedValue() < 0.2f){
+							ivKeyboard.setImageResource(R.drawable.tab_iv_keyboard_3);
+						}
+						
+					}
+				});
+				oa.start();
+			}else{
+				ivKeyboard.setImageResource(R.drawable.tab_iv_keyboard_3);
+			}
 			break;
 		case KEYBOARD_STATE_CALL_SHOW://3
-			ivKeyboard.setImageResource(R.drawable.tab_iv_keyboard_4);
+			if(currentKeyboardState == KEYBOARD_STATE_NO_INPUT_SHOW){//由2->3
+				ObjectAnimator oa = ObjectAnimator.ofFloat(ivKeyboard, "alpha", 1.0f,0.1f,01f,1f).setDuration(KEYBOARD_ANIM_DURATION);
+				oa.addUpdateListener(new AnimatorUpdateListener() {
+					
+					@Override
+					public void onAnimationUpdate(ValueAnimator animation) {
+						if((Float)animation.getAnimatedValue() < 0.2f){
+							ivKeyboard.setImageResource(R.drawable.tab_iv_keyboard_4);
+						}
+						
+					}
+				});
+				oa.start();
+			}else{
+				ivKeyboard.setImageResource(R.drawable.tab_iv_keyboard_4);
+			}
 			break;
 		case KEYBOARD_STATE_CALL_HIDE://4
-			ivKeyboard.setImageResource(R.drawable.tab_iv_keyboard_2);
+			if(currentKeyboardState == KEYBOARD_STATE_CALL_SHOW){//由3->4
+				ObjectAnimator oa = ObjectAnimator.ofFloat(ivKeyboard, "rotationX", -180f,0f).setDuration(KEYBOARD_ANIM_DURATION);
+				oa.addUpdateListener(new AnimatorUpdateListener() {
+					
+					@Override
+					public void onAnimationUpdate(ValueAnimator animation) {
+						// TODO Auto-generated method stub
+//						Log.i("anim", "CurrentPlayTime="+animation.getCurrentPlayTime()+" / Duration="+animation.getDuration()+" / AnimatedValue="+animation.getAnimatedValue()); 
+						if((Float)animation.getAnimatedValue() > -90f){
+							ivKeyboard.setImageResource(R.drawable.tab_iv_keyboard_2);
+						}
+					}
+				});
+				oa.start();
+			}else{
+				ivKeyboard.setImageResource(R.drawable.tab_iv_keyboard_2);
+			}
 			break;
-
 		default:
 			break;
 		}
+		currentKeyboardState = state;
 	}
+	 
 	@SuppressLint("ResourceAsColor")
 	private void setCurrentTab(int cIndex){
 //		LogUtil.i("infos", "MainActivity: keyboardState[1] = "+ currentKeyboardState);
@@ -304,7 +432,26 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 			break;
 		}
 	}
-	
+	AnimatorListener showAnimatorListener = new AnimatorListener() {
+		@Override
+		public void onAnimationStart(Animator arg0) {
+			
+		}
+		
+		@Override
+		public void onAnimationRepeat(Animator arg0) {
+		}
+		
+		@Override
+		public void onAnimationEnd(Animator arg0) {
+			ivKeyboard.setImageResource(R.drawable.tab_iv_keyboard_3);
+		}
+		
+		@Override
+		public void onAnimationCancel(Animator arg0) {
+			
+		}
+	};
 	private class MyOnPageChangeListener implements OnPageChangeListener{
 		@Override
 		public void onPageScrollStateChanged(int index) {

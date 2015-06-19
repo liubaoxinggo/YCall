@@ -2,7 +2,11 @@ package com.fhit.ycall.util;
 
 import android.content.Context;
 import android.util.DisplayMetrics;
-
+/**
+ * 屏幕大小相关属性   px与dp
+ * @author liubaoxing
+ *
+ */
 public class ScreenUtils {
 
 	public ScreenUtils() {

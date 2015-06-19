@@ -1,10 +1,8 @@
 package com.fhit.ycall.fragment;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -24,6 +22,9 @@ import com.fhit.ycall.util.DTMFUtil;
 import com.fhit.ycall.util.FunctionUtil;
 import com.fhit.ycall.util.LogUtil;
 import com.fhit.ycall.util.ToastUtil;
+import com.nineoldandroids.animation.Animator;
+import com.nineoldandroids.animation.Animator.AnimatorListener;
+import com.nineoldandroids.animation.ObjectAnimator;
 
 @SuppressLint("ResourceAsColor") 
 public class HistoryFragment extends HistoryBaseFragment implements OnClickListener,OnTouchListener{
@@ -170,8 +171,14 @@ public class HistoryFragment extends HistoryBaseFragment implements OnClickListe
 				play(11);
 				input(v.getTag().toString());
 			}*/
-			keyboard.setVisibility(View.GONE);
-			setKeyboardState(MainActivity.KEYBOARD_STATE_CALL_HIDE);
+//			keyboard.setVisibility(View.GONE);
+			//си3->4
+			hideKeyboard(MainActivity.KEYBOARD_ANIM_DURATION);
+			if(TextUtils.isEmpty(etPhoneNumber.getText().toString())){
+				setKeyboardState(MainActivity.KEYBOARD_STATE_NO_INPUT_HIDE);
+			}else{
+				setKeyboardState(MainActivity.KEYBOARD_STATE_CALL_HIDE);
+			}
 			break;
 		case R.id.dialb://и╬ЁЩ╪Э  backspace
 //			play(12);
@@ -231,12 +238,18 @@ public class HistoryFragment extends HistoryBaseFragment implements OnClickListe
 		mContext.setKeyboardState(state);
 	}
 	@Override
-	public void hideKeyboard(){
-		keyboard.setVisibility(View.GONE);
+	public void hideKeyboard(long duration){
+		ObjectAnimator oa = ObjectAnimator.ofFloat(keyboard, "translationY", 0f,keyboard.getHeight()).setDuration(duration);
+		oa.addListener(hideAnimatorListener);
+		oa.start();
+//		keyboard.setVisibility(View.GONE);
 	}
 	@Override
-	public void showKeyboard(){
-		keyboard.setVisibility(View.VISIBLE);
+	public void showKeyboard(long duration){
+		ObjectAnimator oa = ObjectAnimator.ofFloat(keyboard, "translationY", keyboard.getHeight(),0f).setDuration(duration);
+		oa.addListener(showAnimatorListener);
+		oa.start();
+//		keyboard.setVisibility(View.VISIBLE);
 	}
 	private TextWatcher textWatcher = new TextWatcher() {
 
@@ -247,7 +260,6 @@ public class HistoryFragment extends HistoryBaseFragment implements OnClickListe
 		@Override
 		public void onTextChanged(CharSequence s, int start, int before,
 				int count) {
-//			SpannableStringBuilder ssb = (SpannableStringBuilder)s;
 			if(TextUtils.isEmpty(s)){//
 				if(keyboard.getVisibility() == View.VISIBLE){
 					setKeyboardState(MainActivity.KEYBOARD_STATE_NO_INPUT_SHOW);
@@ -270,6 +282,44 @@ public class HistoryFragment extends HistoryBaseFragment implements OnClickListe
 	public void call() {
 		ToastUtil.showLongToast("call");
 	}
+	AnimatorListener hideAnimatorListener = new AnimatorListener() {
+		@Override
+		public void onAnimationStart(Animator arg0) {
+		}
+		
+		@Override
+		public void onAnimationRepeat(Animator arg0) {
+		}
+		
+		@Override
+		public void onAnimationEnd(Animator arg0) {
+			keyboard.setVisibility(View.GONE);
+		}
+		
+		@Override
+		public void onAnimationCancel(Animator arg0) {
+			
+		}
+	};
+	AnimatorListener showAnimatorListener = new AnimatorListener() {
+		@Override
+		public void onAnimationStart(Animator arg0) {
+			keyboard.setVisibility(View.VISIBLE);
+		}
+		
+		@Override
+		public void onAnimationRepeat(Animator arg0) {
+		}
+		
+		@Override
+		public void onAnimationEnd(Animator arg0) {
+		}
+		
+		@Override
+		public void onAnimationCancel(Animator arg0) {
+			
+		}
+	};
 }
 
 

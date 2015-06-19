@@ -8,7 +8,11 @@ import android.os.Vibrator;
 import android.text.InputType;
 import android.view.WindowManager;
 import android.widget.EditText;
-
+/**
+ * 系统功能辅助实现
+ * @author liubaoxing
+ *
+ */
 public class FunctionUtil {
 
 	public FunctionUtil() {
