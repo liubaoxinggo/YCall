@@ -13,12 +13,15 @@
     
     <!-- 顶部布局左侧距离 -->
     <dimen name="top_left_tv_left">12dp</dimen>
-    <dimen name="top_iv_size">28dp</dimen>
-    <dimen name="top_right_rl_size">32dp</dimen>
+    <dimen name="top_iv_size">48dp</dimen>
+    <dimen name="top_right_rl_size">48dp</dimen>
     
-    <dimen name="top_h">48sp</dimen>
+    <dimen name="normal_font_size">18sp</dimen>
+    
+    <dimen name="top_h">48dp</dimen>
     <!-- 顶部布局左侧显示字体大小 -->
     <dimen name="top_left_tv_font_size">24sp</dimen>
+    <dimen name="top_right_btn_font_size">18sp</dimen>
     <dimen name="top_right_tv_unread_font_size">8sp</dimen>
     <!-- 底部tab的字体大小 -->
     <dimen name="bottom_tab_tv_font_size">12sp</dimen>
@@ -32,7 +35,21 @@
     <!--  -->
     <dimen name="no_info_view_top">120dp</dimen>
     <dimen name="no_info_font_size">18sp</dimen>
+    <dimen name="no_info_font_size_1">12sp</dimen>
+    
+    <dimen name="no_info_font_size_btn">18sp</dimen>
+    
     <dimen name="no_info_view_size">100dp</dimen>
+    
+    <!-- 关系页面 -->
+    <dimen name="relationship_left_iv_margintop">32dp</dimen>
+    <dimen name="relationship_left_iv_marginleft">18dp</dimen>
+    <dimen name="relationship_tv_marginleft">18dp</dimen>
+    <dimen name="group_interval">8dp</dimen>
+    
+    <dimen name="my_name_tv_size">18sp</dimen>
+    <dimen name="my_phone_tv_size">12sp</dimen>
+    <dimen name="my_tv_marginleft">8dp</dimen>
 
     
 </resources>

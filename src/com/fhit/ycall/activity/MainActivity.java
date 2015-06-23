@@ -1,4 +1,4 @@
-package com.fhit.ycall;
+package com.fhit.ycall.activity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,9 +6,7 @@ import java.util.List;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -16,6 +14,13 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.fhit.ycall.BaseActivity;
+import com.fhit.ycall.R;
+import com.fhit.ycall.R.color;
+import com.fhit.ycall.R.drawable;
+import com.fhit.ycall.R.id;
+import com.fhit.ycall.R.layout;
+import com.fhit.ycall.R.string;
 import com.fhit.ycall.adapter.TabPagerAdapter;
 import com.fhit.ycall.customview.MViewPager;
 import com.fhit.ycall.fragment.DiscoveryFragment;
@@ -27,13 +32,11 @@ import com.fhit.ycall.fragment.RelationshipFragment;
 import com.fhit.ycall.util.LogUtil;
 import com.fhit.ycall.util.ScreenUtils;
 import com.fhit.ycall.util.ToastUtil;
-import com.nineoldandroids.animation.Animator;
-import com.nineoldandroids.animation.Animator.AnimatorListener;
 import com.nineoldandroids.animation.ObjectAnimator;
 import com.nineoldandroids.animation.ValueAnimator;
 import com.nineoldandroids.animation.ValueAnimator.AnimatorUpdateListener;
 
-public class MainActivity extends FragmentActivity implements OnClickListener{
+public class MainActivity extends BaseActivity implements OnClickListener{
 	
 	private static final int INDEX_FAV = 0;
 	private static final int INDEX_RELATIONSHIP = 1;
@@ -44,7 +47,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 	/**
 	 * 键盘和键盘Tab的动画的持续时间
 	 */
-	public static final long KEYBOARD_ANIM_DURATION = 500;
+	public static final long KEYBOARD_ANIM_DURATION = 300;
 	
 	/**
 	 * 当currentIndex!=INDEX_KEYBOARD时,这是一种缺省状态
@@ -115,6 +118,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
     private void initView(){
     	tvMsgCount = (TextView)findViewById(R.id.top_right_tv);
     	netState = (TextView)findViewById(R.id.net_state);
+    	netState.setVisibility(View.GONE);
     	
     	llBottom = (LinearLayout)findViewById(R.id.bottom_layout);
     	llFav = (LinearLayout)findViewById(R.id.tab_1);
@@ -323,27 +327,31 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 	 * KEYBOARD_STATE_NO_INPUT_SHOW  --> KEYBOARD_STATE_NO_INPUT_HIDE
 	 */
 	private void handleFromShowToHide_2_1(){//2->1
-		ObjectAnimator.ofFloat(ivKeyboard, "rotationX", 0f,180f).setDuration(KEYBOARD_ANIM_DURATION).start();
+		/*ObjectAnimator.ofFloat(ivKeyboard, "rotationX", 0f,180f).setDuration(KEYBOARD_ANIM_DURATION).start();
 		history.hideKeyboard(KEYBOARD_ANIM_DURATION); 
 		//ivKeyboard旋转后的显示效果图是【R.drawable.tab_iv_keyboard_2】，所以ivKeyboard_1的图片资源就为R.drawable.tab_iv_keyboard_2
-		ivKeyboard_1.setImageResource(R.drawable.tab_iv_keyboard_2);
+		ivKeyboard_1.setImageResource(R.drawable.tab_iv_keyboard_2);*/
+		ivKeyboard.setImageResource(R.drawable.tab_iv_keyboard_2);
+		history.hideKeyboard(KEYBOARD_ANIM_DURATION); 
 	} 
 	/**
 	 * 处理 由 隐藏 到 显示<br>
 	 *  KEYBOARD_STATE_NO_INPUT_HIDE   --> KEYBOARD_STATE_NO_INPUT_SHOW
 	 */
 	private void handleFromHideToShow_1_2(){//1->2
-		ObjectAnimator.ofFloat(ivKeyboard, "rotationX", 180f,0f).setDuration(KEYBOARD_ANIM_DURATION).start();
+		/*ObjectAnimator.ofFloat(ivKeyboard, "rotationX", 180f,0f).setDuration(KEYBOARD_ANIM_DURATION).start();
 		history.showKeyboard(KEYBOARD_ANIM_DURATION);
 		//ivKeyboard旋转后的显示效果图是【R.drawable.tab_iv_keyboard_3】，所以ivKeyboard_1的图片资源就为R.drawable.tab_iv_keyboard_3
-		ivKeyboard_1.setImageResource(R.drawable.tab_iv_keyboard_3);
+		ivKeyboard_1.setImageResource(R.drawable.tab_iv_keyboard_3);*/
+		ivKeyboard.setImageResource(R.drawable.tab_iv_keyboard_3);
+		history.showKeyboard(KEYBOARD_ANIM_DURATION);
 	} 
 	/**
 	 * 处理 由 显示 到 隐藏<br>
 	 * KEYBOARD_STATE_CALL_SHOW  --> KEYBOARD_STATE_CALL_HIDE
 	 */
 	private void handleFromShowToHide_3_4(){//3->4
-		ObjectAnimator oa = ObjectAnimator.ofFloat(ivKeyboard, "rotationX", 0f,180f).setDuration(KEYBOARD_ANIM_DURATION);
+		/*ObjectAnimator oa = ObjectAnimator.ofFloat(ivKeyboard, "rotationX", 0f,180f).setDuration(KEYBOARD_ANIM_DURATION);
 		oa.addUpdateListener(new AnimatorUpdateListener() {
 			
 			@Override
@@ -356,14 +364,16 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 		oa.start();
 		history.hideKeyboard(KEYBOARD_ANIM_DURATION); 
 		//ivKeyboard的资源图片【R.drawable.tab_iv_keyboard_3】旋转后的显示效果图是【R.drawable.tab_iv_keyboard_2】，所以ivKeyboard_1的图片资源就为R.drawable.tab_iv_keyboard_2
-		ivKeyboard_1.setImageResource(R.drawable.tab_iv_keyboard_2);
+		ivKeyboard_1.setImageResource(R.drawable.tab_iv_keyboard_2);*/
+		ivKeyboard.setImageResource(R.drawable.tab_iv_keyboard_2);
+		history.hideKeyboard(KEYBOARD_ANIM_DURATION); 
 	} 
 	/**
 	 * 处理 由 隐藏 到 显示<br>
 	 *  KEYBOARD_STATE_CALL_HIDE   --> KEYBOARD_STATE_CALL_SHOW
 	 */
 	private void handleFromHideToShow_4_3(){//4->3
-		ObjectAnimator oa = ObjectAnimator.ofFloat(ivKeyboard, "rotationX", 180f,0f).setDuration(KEYBOARD_ANIM_DURATION);
+		/*ObjectAnimator oa = ObjectAnimator.ofFloat(ivKeyboard, "rotationX", 180f,0f).setDuration(KEYBOARD_ANIM_DURATION);
 		oa.addUpdateListener(new AnimatorUpdateListener() {
 			
 			@Override
@@ -376,7 +386,9 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 		});
 		oa.start();
 		history.showKeyboard(KEYBOARD_ANIM_DURATION);
-		ivKeyboard_1.setImageResource(R.drawable.tab_iv_keyboard_4);
+		ivKeyboard_1.setImageResource(R.drawable.tab_iv_keyboard_4);*/
+		ivKeyboard.setImageResource(R.drawable.tab_iv_keyboard_4);
+		history.showKeyboard(KEYBOARD_ANIM_DURATION);
 	} 
 	/**
 	 * 设置选中的Tab

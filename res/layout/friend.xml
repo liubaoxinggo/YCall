@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    <include
+        android:id="@+id/top" 
+        layout="@layout/top_layout"/>
+	<LinearLayout
+	    android:id="@+id/has_no_internet_phone_book_layout" 
+	    android:layout_width="wrap_content"
+    	android:layout_height="match_parent"
+    	android:layout_centerInParent="true"
+    	android:gravity="center"
+    	android:orientation="vertical"
+    	android:layout_below="@id/top">
+	    <ImageView 
+	        android:id="@+id/has_no_iv"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:scaleType="centerInside"
+	        android:src="@drawable/no_friend"/>
+	    <TextView 
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="@dimen/no_info_font_size"
+	        android:textColor="@color/no_info"
+	        android:text="@string/no_friend"/>
+	    <TextView 
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="@dimen/no_info_font_size_1"
+	        android:textColor="@color/no_info"
+	        android:text="@string/no_internet_phone_book_hint"
+	        android:visibility="gone"/>
+	    <Button 
+	        android:id="@+id/has_no_btn" 
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textColor="@color/c_ffffffff"
+	        android:textSize="@dimen/no_info_font_size_btn"
+	        android:background="@drawable/btn_bg_1"
+	        android:layout_marginTop="16dp"
+	        android:paddingTop="8dp"
+	        android:paddingBottom="8dp"
+	        android:paddingLeft="64dp"
+	        android:paddingRight="64dp"
+	        android:text="@string/to_find_friend"/>
+	</LinearLayout>
+</RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.fhit.ycall.MainActivity">
+    tools:context="com.fhit.ycall.activity.MainActivity">
     <LinearLayout
         android:id="@+id/top" 
         android:layout_width="match_parent"
@@ -49,14 +49,16 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_alignParentBottom="true"
-	        layout="@layout/bottom_layout" />
+	        layout="@layout/main_bottom_layout" />
 	    <ImageView
 	        android:id="@+id/tab_iv_keyboard" 
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:scaleType="centerInside"
 	        android:src="@drawable/tab_iv_keyboard_3"
-	        android:layout_centerInParent="true"/>
+	        android:layout_centerInParent="true"
+	        />
+	    <!-- 作为 tab_iv_keyboard的副本，记录其状态图片-->
 	    <ImageView
 	        android:id="@+id/tab_iv_keyboard_1" 
 	        android:layout_width="wrap_content"

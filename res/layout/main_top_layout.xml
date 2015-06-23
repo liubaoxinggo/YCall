@@ -20,7 +20,7 @@
 	    android:layout_alignParentRight="true"
 	    android:layout_centerVertical="true"
 	    android:layout_marginRight="12dp"
-	    >
+	    android:background="@drawable/btn_bg_2">
 	    <ImageView 
 	        android:layout_width="@dimen/top_iv_size"
 	        android:layout_height="@dimen/top_iv_size"
@@ -36,18 +36,18 @@
 	        android:background="@drawable/unread_bg_small"
 	        android:textSize="@dimen/top_right_tv_unread_font_size"
 	        android:text="10+"
-	        android:visibility="visible"/>
+	        android:visibility="invisible"/>
 	</RelativeLayout>
     <ImageView
 	    android:id="@+id/top_right_search"
 	    android:layout_width="@dimen/top_iv_size"
 	    android:layout_height="@dimen/top_iv_size"
-	    
 	    android:scaleType="centerInside"
 	    android:layout_alignParentRight="true"
 	    android:layout_centerVertical="true"
 	    android:layout_marginRight="72dp"
-	    android:src="@drawable/nav_search"/>
+	    android:src="@drawable/nav_search"
+	    android:background="@drawable/btn_bg_2"/>
 </RelativeLayout>
 
 

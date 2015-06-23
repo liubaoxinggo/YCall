@@ -24,10 +24,15 @@ import android.widget.TextView;
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		TextView view = new TextView(mContext);
-		view.setTextSize(108);
-		view.setTextColor(R.color.red);
-		view.setText(mContext.getResources().getString(R.string.discovery));
+		View view = inflater.inflate(R.layout.discovery, container, false);
+		initView(view);
+		addListener(view);
 		return view;
+	}
+	private void initView(View view) {
+		
+	}
+	private void addListener(View view) {
+		
 	}
 }

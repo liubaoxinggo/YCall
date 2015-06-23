@@ -16,14 +16,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
-import com.fhit.ycall.MainActivity;
 import com.fhit.ycall.R;
+import com.fhit.ycall.activity.MainActivity;
 import com.fhit.ycall.util.DTMFUtil;
 import com.fhit.ycall.util.FunctionUtil;
 import com.fhit.ycall.util.LogUtil;
 import com.fhit.ycall.util.ToastUtil;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.Animator.AnimatorListener;
+import com.nineoldandroids.animation.AnimatorSet;
 import com.nineoldandroids.animation.ObjectAnimator;
 
 @SuppressLint("ResourceAsColor") 
@@ -244,16 +245,28 @@ public class HistoryFragment extends HistoryBaseFragment implements OnClickListe
 	}
 	@Override
 	public void hideKeyboard(long duration){
-		ObjectAnimator oa = ObjectAnimator.ofFloat(keyboard, "translationY", 0f,keyboard.getHeight()).setDuration(duration);
-		oa.addListener(hideAnimatorListener);
-		oa.start();
+		ObjectAnimator oa1 = ObjectAnimator.ofFloat(keyboard, "translationY", 0f,keyboard.getHeight()).setDuration(duration);
+//		oa.addListener(hideAnimatorListener);
+//		oa.start();
+		ObjectAnimator oa2 = ObjectAnimator.ofFloat(keyboard, "alpha", 1f,0.5f).setDuration(duration);
+		AnimatorSet as = new AnimatorSet();
+		as.playTogether(oa1,oa2);
+		as.setTarget(keyboard);
+		as.addListener(hideAnimatorListener);
+		as.start();
 //		keyboard.setVisibility(View.GONE);
 	}
 	@Override
 	public void showKeyboard(long duration){
-		ObjectAnimator oa = ObjectAnimator.ofFloat(keyboard, "translationY", keyboard.getHeight(),0f).setDuration(duration);
-		oa.addListener(showAnimatorListener);
-		oa.start();
+		ObjectAnimator oa1 = ObjectAnimator.ofFloat(keyboard, "translationY", keyboard.getHeight(),0f).setDuration(duration);
+//		oa.addListener(showAnimatorListener);
+//		oa.start();
+		ObjectAnimator oa2 = ObjectAnimator.ofFloat(keyboard, "alpha", 0.5f,1f).setDuration(duration);
+		AnimatorSet as = new AnimatorSet();
+		as.playTogether(oa1,oa2);
+		as.setTarget(keyboard);
+		as.addListener(showAnimatorListener);
+		as.start();
 //		keyboard.setVisibility(View.VISIBLE);
 	}
 	private TextWatcher textWatcher = new TextWatcher() {

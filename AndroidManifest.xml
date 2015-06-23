@@ -17,7 +17,7 @@
         android:label="@string/app_name"
         android:theme="@android:style/Theme.Light.NoTitleBar">
         <activity
-            android:name="com.fhit.ycall.MainActivity"
+            android:name="com.fhit.ycall.activity.LoginActivity"
             android:label="@string/app_name" 
             android:screenOrientation="portrait">
             <intent-filter>
@@ -26,6 +26,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.RegisterActivity"  android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.MainActivity"  android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.InternetPhoneBookActivity"  android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.FriendActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.AttentionBusinessActivity" android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

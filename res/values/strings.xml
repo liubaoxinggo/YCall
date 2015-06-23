@@ -4,6 +4,17 @@
     <string name="app_name">悦呼</string>
     <string name="net_state_disconnect_msg">断网状态，无法正常通话</string>
     
+    <string name="login_in">登录</string>
+    <string name="login_in_title">登录悦呼</string>
+    <string name="login_input_phone_hint">手机号</string>
+    <string name="login_input_password_hint">密码</string>
+    
+    <string name="register">注册</string>
+    <string name="register_title">注册悦呼</string>
+    <string name="register_input_phone_number_hint">请输入手机号</string>
+    <string name="register_get_sms_verification_code">获取短信验证码</string>
+    <string name="register_input_sms_verification_code_hint">输入验证码</string>
+    
     <string name="fav">收藏</string>
     <string name="relationship">关系</string>
     <string name="discovery">发现</string>
@@ -16,5 +27,47 @@
     
     <string name="no_fav">暂无收藏</string>
     <string name="no_history">暂无通话记录</string>
+    
+    
+    <string name="game">游戏</string>
+    
+    <string name="change_password">修改密码</string>
+    <string name="equipment_management">设备管理</string>
+    <string name="free_setting">免打扰设置</string>
+    <string name="blacklist">黑名单</string>
+    
+    <string name="internet_phone_book">网络电话本</string>
+    <string name="friend">朋友</string>
+    <string name="attention_to_business">我的关注</string>
+    <string name="local_phone_book">本地通讯录</string>
+    
+    <string name="no_attention_to_business">暂无关注</string>
+    <string name="to_find_business">去找企业</string>
+    <string name="no_friend">暂无朋友</string>
+    <string name="to_find_friend">去找朋友</string>
+    <string name="no_internet_phone_book">暂无任何联系人</string>
+    <string name="no_internet_phone_book_hint">请上传手机通讯录到网络电话本</string>
+    <string name="upload">上传</string>
 	
 </resources>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
