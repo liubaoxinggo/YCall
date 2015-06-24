@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#ffffff" />
+		    <!-- 描边 -->
+		    <stroke android:width="0px" android:color="#00558E" />
+		    <!-- 圆角 -->
+		    <corners android:bottomLeftRadius="@dimen/corner" android:bottomRightRadius="@dimen/corner"/>
+		    <!-- 渐变 -->
+		    <gradient
+		        android:startColor="@color/c_dddddd"
+		        android:endColor="@color/c_dddddd"
+		        android:angle="90"/>
+		    <padding
+		         android:left="0dp" 
+		         android:top="0dp"
+		         android:right="0dp" 
+		         android:bottom="0dp" />
+        </shape>
+    </item>
+    <item android:state_pressed="false">
+        <shape android:shape="rectangle">
+            <solid android:color="#ffffff" />
+		    <!-- 描边 -->
+		    <stroke android:width="0px" android:color="#476493"/>
+		    <!-- 圆角 -->
+		    <corners android:bottomLeftRadius="@dimen/corner" android:bottomRightRadius="@dimen/corner"/>
+		    <!-- 渐变 -->
+		    <gradient
+		        android:startColor="@color/c_f5f5f5"
+		        android:endColor="@color/c_f5f5f5"
+		        android:angle="90"/>
+		    <padding
+		         android:left="0dp" 
+		         android:top="0dp"
+		         android:right="0dp" 
+		         android:bottom="0dp" />
+        </shape>
+    </item>
+
+</selector>
