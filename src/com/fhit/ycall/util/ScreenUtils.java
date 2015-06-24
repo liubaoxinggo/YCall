@@ -2,6 +2,7 @@ package com.fhit.ycall.util;
 
 import android.content.Context;
 import android.util.DisplayMetrics;
+import android.view.View;
 /**
  * 屏幕大小相关属性   px与dp
  * @author liubaoxing
@@ -42,6 +43,11 @@ public class ScreenUtils {
 		System.out.println("DENSITY_XHIGH = "+DisplayMetrics.DENSITY_XHIGH);
 		System.out.println("DENSITY_XXHIGH = "+DisplayMetrics.DENSITY_XXHIGH);
 		System.out.println("DENSITY_XXXHIGH = "+DisplayMetrics.DENSITY_XXXHIGH);
+	} 
+	public static void getScreenSize(Context context,View root){
+		DisplayMetrics dm = context.getResources().getDisplayMetrics();
+		System.out.println("heightPixels = "+dm.heightPixels+"/ root = "+root.getHeight());
+		System.out.println("h = "+(dm.heightPixels-root.getHeight()));
 	} 
 }
 

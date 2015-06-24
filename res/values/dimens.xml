@@ -16,7 +16,12 @@
     <dimen name="top_iv_size">48dp</dimen>
     <dimen name="top_right_rl_size">48dp</dimen>
     
-    <dimen name="normal_font_size">18sp</dimen>
+    <!-- 一般字体大小 -->
+    <dimen name="normal_font_size_16">16sp</dimen>
+    <dimen name="normal_font_size_18">18sp</dimen>
+    
+    
+    <dimen name="margin_top_bottom_12">12dp</dimen>
     
     <dimen name="top_h">48dp</dimen>
     <!-- 顶部布局左侧显示字体大小 -->
@@ -32,6 +37,7 @@
     
     <!-- 分割线的高度 -->
     <dimen name="line">1px</dimen>
+    <dimen name="corner">5dp</dimen>
     <!--  -->
     <dimen name="no_info_view_top">120dp</dimen>
     <dimen name="no_info_font_size">18sp</dimen>

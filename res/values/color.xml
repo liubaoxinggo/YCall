@@ -7,7 +7,12 @@
     <!-- top -->
     <color name="top_bg">#37B34A</color>
     
+    <!-- 主题绿色  所有的显示 的绿色 -->
+    <color name="theme_green_1">#37B34A</color>
+    <!-- 按钮按下时的绿色 -->
     <color name="btn_bg_press">#329B3E</color>
+    <!-- 遮盖层 -->
+    <color name="floating_layer">#cc333333</color>
     
     <color name="new_msg_flag">#f00</color>
     

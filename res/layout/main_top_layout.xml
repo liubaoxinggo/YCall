@@ -19,7 +19,6 @@
 	    android:layout_height="@dimen/top_right_rl_size"
 	    android:layout_alignParentRight="true"
 	    android:layout_centerVertical="true"
-	    android:layout_marginRight="12dp"
 	    android:background="@drawable/btn_bg_2">
 	    <ImageView 
 	        android:layout_width="@dimen/top_iv_size"
@@ -45,7 +44,7 @@
 	    android:scaleType="centerInside"
 	    android:layout_alignParentRight="true"
 	    android:layout_centerVertical="true"
-	    android:layout_marginRight="72dp"
+	    android:layout_marginRight="@dimen/top_right_rl_size"
 	    android:src="@drawable/nav_search"
 	    android:background="@drawable/btn_bg_2"/>
 </RelativeLayout>

@@ -8,12 +8,23 @@
     <string name="login_in_title">登录悦呼</string>
     <string name="login_input_phone_hint">手机号</string>
     <string name="login_input_password_hint">密码</string>
+    <string name="login_forget_password">忘记密码</string>
     
     <string name="register">注册</string>
+    <string name="submit">提交</string>
     <string name="register_title">注册悦呼</string>
+    <string name="register_country_code">中国（+86）</string>
+    <string name="register_confirm_phone_number">确认手机号</string>
+    <string name="register_confirm_phone_number_info">悦呼将发送验证码短信到这个号码：</string>
     <string name="register_input_phone_number_hint">请输入手机号</string>
+    <string name="register_agree_and_accept_ycall">同意并接受悦呼</string>
+    <string name="register_service_terms">《服务条款》</string>
+    <string name="register_sms_verification_code_has_send_to">短信验证码已发送至：</string>
     <string name="register_get_sms_verification_code">获取短信验证码</string>
     <string name="register_input_sms_verification_code_hint">输入验证码</string>
+    
+    <string name="cancle">取消</string>
+    <string name="confirm">确定</string>
     
     <string name="fav">收藏</string>
     <string name="relationship">关系</string>
