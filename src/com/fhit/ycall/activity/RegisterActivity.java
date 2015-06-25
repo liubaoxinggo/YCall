@@ -6,20 +6,17 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.fhit.ycall.BaseActivity;
 import com.fhit.ycall.R;
-import com.fhit.ycall.util.ScreenUtils;
 import com.fhit.ycall.util.ToastUtil;
 
 public class RegisterActivity extends BaseActivity {
 
 	//узуж╡Ц
 	private View floatingLayer;
-	//
-	private LinearLayout registerLL1,registerLL2;
+	 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -28,6 +25,8 @@ public class RegisterActivity extends BaseActivity {
 		initView();
 	}
 	private void initView() {
+		((TextView)findViewById(R.id.center_input_et)).setVisibility(View.INVISIBLE);
+		((TextView)findViewById(R.id.left_title_tv)).setVisibility(View.VISIBLE);
 		((TextView)findViewById(R.id.left_title_tv)).setText(R.string.register_title);
 		((ImageView)findViewById(R.id.left_back_ic)).setOnClickListener(new OnClickListener() {
 			
@@ -38,10 +37,8 @@ public class RegisterActivity extends BaseActivity {
 			}
 		});
 		floatingLayer = (View)findViewById(R.id.floating_layer);
-		registerLL1 = (LinearLayout)findViewById(R.id.register_ll_1);
-		registerLL2 = (LinearLayout)findViewById(R.id.register_ll_2);
 		((Button)findViewById(R.id.register_btn)).setOnClickListener(goToRegisterListener);
-		((Button)findViewById(R.id.submit_btn)).setOnClickListener(goToSubmitListener);
+		((Button)findViewById(R.id.register_get_sms_verification_code)).setOnClickListener(getSmsVrifyCodeListener);
 		((Button)findViewById(R.id.cancle)).setOnClickListener(cancleListener);
 		((Button)findViewById(R.id.confirm)).setOnClickListener(okListener);
 	}
@@ -52,8 +49,6 @@ public class RegisterActivity extends BaseActivity {
 			super.onBackPressed();
 		}else{
 			floatingLayer.setVisibility(View.GONE);
-			registerLL1.setVisibility(View.VISIBLE);
-			registerLL2.setVisibility(View.GONE); 
 		}
 	}
 	private  OnClickListener goToRegisterListener = new OnClickListener() {
@@ -63,19 +58,17 @@ public class RegisterActivity extends BaseActivity {
 			// TODO Auto-generated method stub
 			ToastUtil.showLongToast(getResources().getString(R.string.register));
 			floatingLayer.setVisibility(View.VISIBLE);
-			registerLL1.setVisibility(View.VISIBLE);
-			registerLL2.setVisibility(View.GONE);
+			 
 		}
 	};
-	private  OnClickListener goToSubmitListener = new OnClickListener() {
+	private  OnClickListener getSmsVrifyCodeListener = new OnClickListener() {
 		
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			ToastUtil.showLongToast(getResources().getString(R.string.submit));
-			floatingLayer.setVisibility(View.GONE);
-			registerLL1.setVisibility(View.VISIBLE);
-			registerLL2.setVisibility(View.GONE);
+			floatingLayer.setVisibility(View.VISIBLE);
+			 
 		}
 	};
 	private  OnClickListener okListener = new OnClickListener() {
@@ -84,8 +77,7 @@ public class RegisterActivity extends BaseActivity {
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			floatingLayer.setVisibility(View.GONE);
-			registerLL1.setVisibility(View.GONE);
-			registerLL2.setVisibility(View.VISIBLE); 
+			 
 		}
 	};
 	private  OnClickListener cancleListener = new OnClickListener() {
@@ -94,8 +86,7 @@ public class RegisterActivity extends BaseActivity {
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			floatingLayer.setVisibility(View.GONE);
-			registerLL1.setVisibility(View.VISIBLE);
-			registerLL2.setVisibility(View.GONE); 
+			 
 		}
 	};
 }

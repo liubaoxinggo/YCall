@@ -12,25 +12,15 @@
         android:layout_alignParentLeft="true"
         android:src="@drawable/back"
         android:background="@drawable/btn_bg_2"/>
-    <TextView 
-        android:id="@+id/left_title_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="8dp"
-        android:layout_toRightOf="@id/left_back_ic"
-        android:textSize="@dimen/top_left_tv_font_size"
-        android:textColor="@color/c_ffffffff"
-        android:text="@string/app_name"/>
     <ImageView
 	    android:id="@+id/top_right_ic"
 	    android:layout_width="@dimen/top_iv_size"
 	    android:layout_height="@dimen/top_iv_size"
 	    android:layout_alignParentRight="true"
 	    android:layout_centerVertical="true"
-	    android:layout_marginRight="12dp"
 	    android:scaleType="centerInside"
 	    android:src="@drawable/nav_search"
+	    android:background="@drawable/btn_bg_3"
 	    android:visibility="invisible"/>
     <Button
 	    android:id="@+id/top_right_btn"
@@ -43,5 +33,38 @@
 	    android:textColor="@color/c_ffffffff"
 	    android:visibility="invisible"
 	    android:background="@drawable/btn_bg_3"/>
+    <TextView 
+        android:id="@+id/left_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@id/left_back_ic"
+        android:layout_toLeftOf="@id/top_right_btn"
+        android:textSize="@dimen/top_left_tv_font_size"
+        android:textColor="@color/c_ffffffff"
+        android:text="@string/app_name"
+        android:visibility="visible"/>
+    <EditText 
+        android:id="@+id/center_input_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/left_back_ic"
+        android:layout_toLeftOf="@id/top_right_btn"
+        android:textSize="@dimen/normal_font_size_18"
+        android:textColor="@color/c_333333"
+        android:singleLine="true"
+        android:hint="@string/top_search_hint"
+        android:textColorHint="@color/input_num_hint"
+        android:textCursorDrawable="@null"
+		android:cursorVisible="true"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:layout_margin="4dp"
+        android:background="@drawable/rect_no_corner_bg"
+        android:visibility="invisible"/>
     
 </RelativeLayout>

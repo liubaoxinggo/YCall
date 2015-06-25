@@ -19,6 +19,8 @@ public class InternetPhoneBookActivity extends BaseActivity {
 		initView();
 	}
 	private void initView(){
+		((TextView)findViewById(R.id.center_input_et)).setVisibility(View.INVISIBLE);
+		((TextView)findViewById(R.id.left_title_tv)).setVisibility(View.VISIBLE);
 		((TextView)findViewById(R.id.left_title_tv)).setText(R.string.internet_phone_book);
 		((ImageView)findViewById(R.id.left_back_ic)).setOnClickListener(new OnClickListener() {
 			

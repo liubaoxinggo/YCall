@@ -12,8 +12,8 @@
            android:id="@+id/me_photo" 
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
-           android:layout_marginTop="@dimen/relationship_left_iv_margintop"
-           android:layout_marginBottom="@dimen/relationship_left_iv_margintop"
+           android:layout_marginTop="@dimen/relationship_left_iv_marginleft"
+           android:layout_marginBottom="@dimen/relationship_left_iv_marginleft"
            android:layout_marginLeft="@dimen/relationship_left_iv_marginleft"
            android:scaleType="centerInside"
            android:src="@drawable/account_photo_defaut"/>

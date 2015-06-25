@@ -23,6 +23,8 @@ public class LoginActivity extends BaseActivity {
 	}
 
 	private void initView() {
+		((TextView)findViewById(R.id.center_input_et)).setVisibility(View.INVISIBLE);
+		((TextView)findViewById(R.id.left_title_tv)).setVisibility(View.VISIBLE);
 		((TextView)findViewById(R.id.left_title_tv)).setText(R.string.login_in_title);
 		((ImageView)findViewById(R.id.left_back_ic)).setOnClickListener(new OnClickListener() {
 			

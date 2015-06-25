@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
@@ -190,11 +191,11 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 			setCurrentTab(INDEX_RELATIONSHIP);
 			break;
 		case R.id.tab_iv_keyboard://原
-			ToastUtil.showShortToast("原");
+//			ToastUtil.showShortToast("原");
 			handleClickKeyboardTab();
 			break;
 		case R.id.tab_iv_keyboard_1://副
-			ToastUtil.showShortToast("副");
+//			ToastUtil.showShortToast("副");
 			setCurrentTab(INDEX_KEYBOARD);
 			break;
 		case R.id.tab_3:
@@ -207,7 +208,8 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 			ToastUtil.showShortToast(getResources().getString(R.string.top_msg)); 
 			break;
 		case R.id.top_right_search://右上角 search
-			ToastUtil.showShortToast(getResources().getString(R.string.top_search)); 
+//			ToastUtil.showShortToast(getResources().getString(R.string.top_search));
+			startActivity(new Intent(this, SearchActivity.class));
 			break;
 		default:
 			break;

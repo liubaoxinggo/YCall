@@ -21,7 +21,7 @@
     <dimen name="normal_font_size_18">18sp</dimen>
     
     
-    <dimen name="margin_top_bottom_12">12dp</dimen>
+    <dimen name="margin_top_bottom_16">16dp</dimen>
     
     <dimen name="top_h">48dp</dimen>
     <!-- 顶部布局左侧显示字体大小 -->
@@ -53,8 +53,8 @@
     <dimen name="relationship_tv_marginleft">18dp</dimen>
     <dimen name="group_interval">8dp</dimen>
     
-    <dimen name="my_name_tv_size">18sp</dimen>
-    <dimen name="my_phone_tv_size">12sp</dimen>
+    <dimen name="my_name_tv_size">20sp</dimen>
+    <dimen name="my_phone_tv_size">14sp</dimen>
     <dimen name="my_tv_marginleft">8dp</dimen>
 
     

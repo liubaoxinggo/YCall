@@ -28,10 +28,11 @@
                 android:drawableLeft="@drawable/equipment_management"
                 android:drawablePadding="8dp"
                 android:inputType="phone"
+                android:singleLine="true"
 		        android:textCursorDrawable="@null"
 		        android:cursorVisible="true"
-                android:layout_marginBottom="@dimen/margin_top_bottom_12"
-                android:layout_marginTop="@dimen/margin_top_bottom_12"/>
+                android:layout_marginBottom="@dimen/margin_top_bottom_16"
+                android:layout_marginTop="@dimen/margin_top_bottom_16"/>
             <include 
                 layout="@layout/line"/>
             <EditText 
@@ -45,10 +46,11 @@
                 android:drawableLeft="@drawable/password"
                 android:drawablePadding="8dp"
                 android:inputType="textPassword"
+                android:singleLine="true"
 		        android:textCursorDrawable="@null"
 		        android:cursorVisible="true"
-		        android:layout_marginBottom="@dimen/margin_top_bottom_12"
-                android:layout_marginTop="@dimen/margin_top_bottom_12"/>"
+		        android:layout_marginBottom="@dimen/margin_top_bottom_16"
+                android:layout_marginTop="@dimen/margin_top_bottom_16"/>"
         </LinearLayout>
         <Button 
             android:id="@+id/login_btn"

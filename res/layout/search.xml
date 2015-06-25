@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+	<include layout="@layout/top_layout"/>
+	<RelativeLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:orientation="vertical">
+	    <TextView
+	        android:id="@+id/no_search_flag" 
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="72dp"
+	        android:layout_centerHorizontal="true"
+	        android:gravity="center"
+	        android:drawableTop="@drawable/no_search_icon"
+	        android:text="@string/no_search"
+	        android:textColor="@color/no_info"
+	        android:textSize="@dimen/no_info_font_size"/>
+	</RelativeLayout>
+</LinearLayout>
