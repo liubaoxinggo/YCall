@@ -9,7 +9,12 @@
         android:targetSdkVersion="19" />
     <!-- 振动权限 -->
     <uses-permission android:name="android.permission.VIBRATE"/>
-
+    <!-- 访问网络权限 -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+	<!-- 读取短信 -->
+    <uses-permission android:name="android.permission.READ_SMS"/>
+    <!--  -->
+    <uses-permission android:name="android.permission.WRITE_SMS"/>
     <application
         android:name="com.fhit.ycall.TApplication"
         android:allowBackup="true"
@@ -33,6 +38,7 @@
         <activity android:name=".activity.InternetPhoneBookActivity"  android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.FriendActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.AttentionBusinessActivity" android:screenOrientation="portrait"></activity>
+        <service android:name="com.fhit.ycall.service.YCallService"></service>
     </application>
 
 </manifest>

@@ -17,7 +17,8 @@
             android:background="@drawable/rect_has_corner_bg"
             android:paddingLeft="8dp"
             android:paddingRight="8dp">
-            <EditText 
+            <EditText
+                android:id="@+id/login_phone_et" 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
@@ -36,6 +37,7 @@
             <include 
                 layout="@layout/line"/>
             <EditText 
+                android:id="@+id/login_pwd_et" 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"

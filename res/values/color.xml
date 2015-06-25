@@ -46,5 +46,7 @@
     <color name="c_333333">#333333</color>
     <color name="c_666666">#666666</color>
     <color name="c_dddddd">#dddddd</color>
+    <!-- 弹出loading背景色 -->
+    <color name="loading_dialog_bg">#99aaaaaa</color>
     
 </resources>

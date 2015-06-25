@@ -52,7 +52,7 @@ public class HistoryFragment extends HistoryBaseFragment implements OnClickListe
 		addListener(view);
 		initData();
 		//Òþ²ØÏµÍ³¼üÅÌ
-		FunctionUtil.setCursor(mContext, etPhoneNumber);
+		FunctionUtil.hideSystemKeyboard(mContext, etPhoneNumber);
 		return view;
 	}
 	@Override

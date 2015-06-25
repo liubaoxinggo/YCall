@@ -5,10 +5,13 @@ import java.lang.reflect.Method;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Service;
+import android.content.Context;
 import android.os.Build;
 import android.os.Vibrator;
 import android.text.InputType;
+import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 /**
  * 系统功能辅助实现
@@ -25,7 +28,7 @@ public class FunctionUtil {
 	 * 3.0以下 的版本可以用etPhoneNumber.setInputType(InputType.TYPE_NULL)来实现;<br>
 	 * 3.0以上的版本需另行方法
 	 */
-	public static void setCursor(Activity mContext,EditText etInput){
+	public static void hideSystemKeyboard(Activity mContext,EditText etInput){
 		if (android.os.Build.VERSION.SDK_INT <= Build.VERSION_CODES.GINGERBREAD_MR1) {
 			etInput.setInputType(InputType.TYPE_NULL);
 		} else {
@@ -40,6 +43,17 @@ public class FunctionUtil {
 				e.printStackTrace();
 			}
 		}
+	}
+	/**
+	 * 如果输入法在窗口上已经显示，则隐藏，反之则显示
+	 * @param mContext
+	 */
+	public static void showOrHideSystemKeyboard(Activity mContext){
+		InputMethodManager imm = (InputMethodManager)mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+	}
+	public static boolean getSystemKeyboardState(Activity mContext){
+		return ((InputMethodManager)mContext.getSystemService(Context.INPUT_METHOD_SERVICE)).isActive();
 	}
 	/**
 	 * 振动【需要权限 ：android.permission.VIBRATE】
