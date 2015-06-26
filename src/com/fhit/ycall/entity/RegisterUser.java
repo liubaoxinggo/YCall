@@ -1,6 +1,5 @@
 package com.fhit.ycall.entity;
 
-import com.google.gson.Gson;
 /**
  * ×¢²áÊµÌå
  * @author liubaoxing

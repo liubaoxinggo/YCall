@@ -1,6 +1,7 @@
 package com.fhit.ycall.http;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 import org.apache.commons.httpclient.DefaultHttpMethodRetryHandler;
@@ -13,6 +14,9 @@ import org.apache.commons.httpclient.methods.PutMethod;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.apache.commons.httpclient.protocol.Protocol;
 
+import android.util.Base64;
+
+import com.fhit.ycall.util.ConfigUtil;
 import com.fhit.ycall.util.LogUtil;
 
 public class HttpHelper {
@@ -21,7 +25,19 @@ public class HttpHelper {
 	private final static int TIMEOUT_CONNECTION = 20000;
 	private final static int TIMEOUT_SOCKET = 20000;
 	private final static int RETRY_TIME = 3;
-	
+	public static void setAuthorization(final String username,final String password){
+		try {
+			String auto = username+":"+password;
+			String authorization = "Basic "+Base64.encodeToString(auto.getBytes("utf-8"), Base64.URL_SAFE);
+			authorization = authorization.substring(0,authorization.length()-1);
+			LogUtil.i("ycall", "生成的令牌 authorization = "+authorization);
+			ConfigUtil.getInstance().setConfigString("authorization", authorization);
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+			LogUtil.eSave("ycall", "HttpHelper-setAuthorization()异常：", e1.fillInStackTrace());
+		}
+		
+	}
 	private static  HttpClient getHttpClient() {   
 		Protocol https = new Protocol("https", new HTTPSSecureProtocolSocketFactory(), 443);
 		Protocol.registerProtocol("https", https);
@@ -44,37 +60,37 @@ public class HttpHelper {
 		httpGet.setPath(url);
 		// 设置 请求超时时间
 		httpGet.getParams().setSoTimeout(TIMEOUT_SOCKET);
-//		String Authorization = ConfigUtil.getInstance().getConfigString("authorization");
-//		if(!"".equals("Authorization")){
-//			httpGet.addRequestHeader("Authorization", Authorization);
-//		}
+		String Authorization = ConfigUtil.getInstance().getConfigString("authorization");
+		if(!"".equals("Authorization")){
+			httpGet.addRequestHeader("Authorization", Authorization);
+		}
 		httpGet.setRequestHeader("content-type", "application/json");
 		return httpGet;
 	}
 	private static PostMethod getHttpPost(String url, String cookie, String userAgent) {
 		PostMethod httpPost = new PostMethod(url);
-//		String Authorization = ConfigUtil.getInstance().getConfigString("authorization");
-//		if(!"".equals("Authorization")){
-//			httpPost.addRequestHeader("Authorization", Authorization);
-//		}
+		String Authorization = ConfigUtil.getInstance().getConfigString("authorization");
+		if(!"".equals("Authorization")){
+			httpPost.addRequestHeader("Authorization", Authorization);
+		}
 		httpPost.setRequestHeader("Content-Type", "application/json");
 		return httpPost;
 	}
 	private static DeleteMethod getHttpDelete(String url, String cookie, String userAgent){
 		DeleteMethod httpDelete = new DeleteMethod(url);
-//		String Authorization = ConfigUtil.getInstance().getConfigString("authorization");
-//		if(!"".equals("Authorization")){
-//			httpDelete.addRequestHeader("Authorization", Authorization);
-//		}
+		String Authorization = ConfigUtil.getInstance().getConfigString("authorization");
+		if(!"".equals("Authorization")){
+			httpDelete.addRequestHeader("Authorization", Authorization);
+		}
 		httpDelete.setRequestHeader("Content-Type", "application/json");
 		return httpDelete;
 	}
 	private static PutMethod getHttpPut(String url, String cookie, String userAgent){
 		PutMethod httpDelete = new PutMethod(url);
-//		String Authorization = ConfigUtil.getInstance().getConfigString("authorization");
-//		if(!"".equals("Authorization")){
-//			httpDelete.addRequestHeader("Authorization", Authorization);
-//		}
+		String Authorization = ConfigUtil.getInstance().getConfigString("authorization");
+		if(!"".equals("Authorization")){
+			httpDelete.addRequestHeader("Authorization", Authorization);
+		}
 		httpDelete.setRequestHeader("Content-Type", "application/json");
 		return httpDelete;
 	}
@@ -120,7 +136,6 @@ public class HttpHelper {
 					continue;
 				}
 				// 发生致命的异常，可能是协议不对或者返回的内容有问题
-				e.printStackTrace();
 				throw AppException.http(e);
 			} catch (IOException e) {
 				time++;
@@ -131,7 +146,6 @@ public class HttpHelper {
 					continue;
 				}
 				// 发生网络异常
-				e.printStackTrace();
 				throw AppException.network(e);
 			} finally {
 				// 释放连接
@@ -164,7 +178,6 @@ public class HttpHelper {
 					continue;
 				}
 				// 发生致命的异常，可能是协议不对或者返回的内容有问题
-				e.printStackTrace();
 				throw AppException.http(e);
 			} catch (IOException e) {
 				time++;
@@ -175,7 +188,6 @@ public class HttpHelper {
 					continue;
 				}
 				// 发生网络异常
-				e.printStackTrace();
 				throw AppException.network(e);
 			} finally {
 				// 释放连接
@@ -208,7 +220,6 @@ public class HttpHelper {
 					continue;
 				}
 				// 发生致命的异常，可能是协议不对或者返回的内容有问题
-				e.printStackTrace();
 				throw AppException.http(e);
 			} catch (IOException e) {
 				time++;
@@ -219,7 +230,6 @@ public class HttpHelper {
 					continue;
 				}
 				// 发生网络异常
-				e.printStackTrace();
  				throw AppException.network(e);
 			} finally {
 				// 释放连接

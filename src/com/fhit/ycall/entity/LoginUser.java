@@ -6,7 +6,6 @@ public class LoginUser extends BaseEntity{
 	private String Password;
 	public LoginUser() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public String getCellphone() {
 		return Cellphone;

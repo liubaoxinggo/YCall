@@ -13,17 +13,21 @@ import org.apache.commons.httpclient.HttpException;
 
 import android.content.Context;
 import android.os.Environment;
+import android.widget.Toast;
+
+import com.fhit.ycall.R;
 
 /**
- *  鎼存梻鏁ょ粙瀣碍瀵倸鐖剁猾浼欑窗閻€劋绨幑鏇″箯瀵倸鐖堕崪灞惧絹缁�娲晩鐠囶垯淇婇幁锟�
+ * 应用程序异常类：用于捕获异常和提示错误信息
  * @author liux (http://my.oschina.net/liux)
  * @version 1.0
  * @created 2012-3-21
  */
 public class AppException extends Exception {
-	private final static boolean Debug = false;//閺勵垰鎯佹穱婵嗙摠闁挎瑨顕ら弮銉ョ箶
+
+	private final static boolean Debug = false;//是否保存错误日志
 	
-	/** 鐎规矮绠熷鍌氱埗缁鐎� */
+	/** 定义异常类型 */
 	public final static byte TYPE_NETWORK 	= 0x01;
 	public final static byte TYPE_SOCKET	= 0x02;
 	public final static byte TYPE_HTTP_CODE	= 0x03;
@@ -51,38 +55,38 @@ public class AppException extends Exception {
 	}
 	
 	/**
-	 * 閹绘劗銇氶崣瀣偨閻ㄥ嫰鏁婄拠顖欎繆閹拷
+	 * 提示友好的错误信息
 	 * @param ctx
 	 */
 	public void makeToast(Context ctx){
-	//	switch(this.getType()){
-	//	case TYPE_HTTP_CODE:
-	//		String err = ctx.getString(R.string.http_status_code_error, this.getCode());
-	//		Toast.makeText(ctx, err, Toast.LENGTH_SHORT).show();
-	//		break;
-	//	case TYPE_HTTP_ERROR:
-	//		Toast.makeText(ctx, R.string.http_exception_error, Toast.LENGTH_SHORT).show();
-	//		break;
-	//	case TYPE_SOCKET:
-	//		Toast.makeText(ctx, R.string.socket_exception_error, Toast.LENGTH_SHORT).show();
-	//		break;
-	//	case TYPE_NETWORK:
-	//		Toast.makeText(ctx, R.string.network_not_connected, Toast.LENGTH_SHORT).show();
-	//		break;
-	//	case TYPE_XML:
-	//		Toast.makeText(ctx, R.string.xml_parser_failed, Toast.LENGTH_SHORT).show();
-	//		break;
-	//	case TYPE_IO:
-	//		Toast.makeText(ctx, R.string.io_exception_error, Toast.LENGTH_SHORT).show();
-	//		break;
-	//	case TYPE_RUN:
-	//		Toast.makeText(ctx, R.string.app_run_code_error, Toast.LENGTH_SHORT).show();
-	//		break;
-	//	}
+		switch(this.getType()){
+		case TYPE_HTTP_CODE:
+			String err = ctx.getString(R.string.http_status_code_error, this.getCode());
+			Toast.makeText(ctx, err, Toast.LENGTH_SHORT).show();
+			break;
+		case TYPE_HTTP_ERROR:
+			Toast.makeText(ctx, R.string.http_exception_error, Toast.LENGTH_SHORT).show();
+			break;
+		case TYPE_SOCKET:
+			Toast.makeText(ctx, R.string.socket_exception_error, Toast.LENGTH_SHORT).show();
+			break;
+		case TYPE_NETWORK:
+			Toast.makeText(ctx, R.string.network_not_connected, Toast.LENGTH_SHORT).show();
+			break;
+		case TYPE_XML:
+			Toast.makeText(ctx, R.string.xml_parser_failed, Toast.LENGTH_SHORT).show();
+			break;
+		case TYPE_IO:
+			Toast.makeText(ctx, R.string.io_exception_error, Toast.LENGTH_SHORT).show();
+			break;
+		case TYPE_RUN:
+			Toast.makeText(ctx, R.string.app_run_code_error, Toast.LENGTH_SHORT).show();
+			break;
+		}
 	}
 	
 	/**
-	 * 娣囨繂鐡ㄥ鍌氱埗閺冦儱绻�
+	 * 保存异常日志
 	 * @param excp
 	 */
 	public void saveErrorLog(Exception excp) {
@@ -92,17 +96,17 @@ public class AppException extends Exception {
 		FileWriter fw = null;
 		PrintWriter pw = null;
 		try {
-			//閸掋倖鏌囬弰顖氭儊閹稿倽娴囨禍鍝燚閸楋拷
+			//判断是否挂载了SD卡
 			String storageState = Environment.getExternalStorageState();		
 			if(storageState.equals(Environment.MEDIA_MOUNTED)){
-				savePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/ucall/Log/";
+				savePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/ycall/exception/";
 				File file = new File(savePath);
 				if(!file.exists()){
 					file.mkdirs();
 				}
 				logFilePath = savePath + errorlog;
 			}
-			//濞屸剝婀侀幐鍌濇祰SD閸椻槄绱濋弮鐘崇《閸愭瑦鏋冩禒锟�
+			//没有挂载SD卡，无法写文件
 			if(logFilePath == ""){
 				return;
 			}
@@ -122,7 +126,7 @@ public class AppException extends Exception {
 			if(pw != null){ pw.close(); } 
 			if(fw != null){ try { fw.close(); } catch (IOException e) { }}
 		}
-	
+
 	}
 	
 	public static AppException http(int code) {
@@ -132,7 +136,7 @@ public class AppException extends Exception {
 	public static AppException http(Exception e) {
 		return new AppException(TYPE_HTTP_ERROR, 0 ,e);
 	}
-	
+
 	public static AppException socket(Exception e) {
 		return new AppException(TYPE_SOCKET, 0 ,e);
 	}
@@ -167,4 +171,5 @@ public class AppException extends Exception {
 	public static AppException run(Exception e) {
 		return new AppException(TYPE_RUN, 0, e);
 	}
+	
 }

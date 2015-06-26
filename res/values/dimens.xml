@@ -57,7 +57,18 @@
     <dimen name="my_name_tv_size">20sp</dimen>
     <dimen name="my_phone_tv_size">14sp</dimen>
     <dimen name="my_tv_marginleft">8dp</dimen>
-
+    
+    
+    <!-- item 布局使用 -->
+    <dimen name="logo_photo_margin">8dp</dimen>
+    <dimen name="logo_photo_margin_top">12dp</dimen>
+    <dimen name="logo_photo_margin_bottom">8dp</dimen>
+    <dimen name="logo_photo_margin_left">12dp</dimen>
+    <dimen name="logo_photo_margin_right">8dp</dimen>
+    <dimen name="right_view_margin_right">8dp</dimen>
+    <!-- 弹出的progressDialog -->
+    <dimen name="dialog_view_padding_left_right">16dp</dimen>
+    <dimen name="dialog_view_padding_top_bottom">10dp</dimen>
     
 </resources>
 

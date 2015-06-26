@@ -11,7 +11,6 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnLongClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -19,16 +18,18 @@ import android.widget.TextView;
 
 import com.fhit.ycall.BaseActivity;
 import com.fhit.ycall.R;
+import com.fhit.ycall.http.HttpHelper;
 import com.fhit.ycall.http.HttpResponseResult;
 import com.fhit.ycall.util.ConfigUtil;
+import com.fhit.ycall.util.LogUtil;
 import com.fhit.ycall.util.StringUtil;
 import com.fhit.ycall.util.ToastUtil;
 
 public class LoginActivity extends BaseActivity {
 
-	private static final int TO_LOGIN = 1;
+	private static final int TO_LOGIN = 0x001;
 	private EditText etPhone,etPwd;
-	private Handler handler = new Handler(){
+	private Handler handler = new BaseHandler(){
 
 		@Override
 		public void handleMessage(Message msg) {
@@ -36,21 +37,22 @@ public class LoginActivity extends BaseActivity {
 			super.handleMessage(msg);
 			switch (msg.what) {
 			case TO_LOGIN:
-				HttpResponseResult mHttpResponseResultA = (HttpResponseResult) msg.obj;
 				dismissDialog();
+				HttpResponseResult mHttpResponseResultA = (HttpResponseResult) msg.obj;
 				if(mHttpResponseResultA != null){
 					if(mHttpResponseResultA.getStatusCode() == HttpStatus.SC_NO_CONTENT 
 							|| mHttpResponseResultA.getStatusCode() == HttpStatus.SC_OK){
+						HttpHelper.setAuthorization(etPhone.getText().toString(), etPwd.getText().toString());
 						goToMain();
 					}else{
 						ToastUtil.showLongToast(mHttpResponseResultA.getErrorMsg());
 					}
 				}
 				break;
-
 			default:
 				break;
 			}
+			
 		}
 		
 	};
@@ -61,11 +63,43 @@ public class LoginActivity extends BaseActivity {
 		setContentView(R.layout.login);
 		bindService();
 		initView();
+		LogUtil.i("infos", this.getLocalClassName()+"--onCreate()");
+	}
+	@Override
+	protected void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
+		LogUtil.i("infos", this.getLocalClassName()+"--onStart()");
 		initData();
+	}
+	@Override
+	protected void onRestart() {
+		// TODO Auto-generated method stub
+		LogUtil.i("infos", this.getLocalClassName()+"--onRestart()");
+		super.onRestart();
+	}
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		LogUtil.i("infos", this.getLocalClassName()+"--onResume()");
+		super.onResume();
+	}
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		LogUtil.i("infos", this.getLocalClassName()+"--onPause()");
+		super.onPause();
+	}
+	@Override
+	protected void onStop() {
+		LogUtil.i("infos", this.getLocalClassName()+"--onStop()");
+		// TODO Auto-generated method stub
+		super.onStop();
 	}
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
+		LogUtil.i("infos", this.getLocalClassName()+"--onDestroy()");
 		super.onDestroy();
 		unBindService();
 	}
@@ -91,16 +125,8 @@ public class LoginActivity extends BaseActivity {
 		((Button)findViewById(R.id.login_btn)).setOnClickListener(goToLoginListener);
 	}
 	private void initData(){
-		Intent loginIntent = this.getIntent();
-		if(loginIntent != null){
-			etPhone.setText(loginIntent.getStringExtra("phone"));
-			etPwd.setText(loginIntent.getStringExtra("password"));
-			ConfigUtil.getInstance().setConfigString("phone", loginIntent.getStringExtra("phone"));
-			ConfigUtil.getInstance().setConfigString("password", loginIntent.getStringExtra("password"));
-		}else{
-			etPhone.setText(ConfigUtil.getInstance().getConfigString("phone"));
-			etPwd.setText(ConfigUtil.getInstance().getConfigString("password"));
-		}
+		etPhone.setText(ConfigUtil.getInstance().getConfigString("phone"));
+		etPwd.setText(ConfigUtil.getInstance().getConfigString("password"));
 	}
 	private  OnClickListener goToRegisterListener = new OnClickListener() {
 		
@@ -108,7 +134,7 @@ public class LoginActivity extends BaseActivity {
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
-			finish();
+//			finish();
 		}
 	};
 	private  OnClickListener goToLoginListener = new OnClickListener() {

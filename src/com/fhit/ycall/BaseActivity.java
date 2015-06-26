@@ -1,5 +1,6 @@
 package com.fhit.ycall;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.Context;
@@ -8,9 +9,12 @@ import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 import android.support.v4.app.FragmentActivity;
-
+import com.fhit.ycall.http.ApiClient;
+import com.fhit.ycall.http.AppException;
 import com.fhit.ycall.http.URLs;
 import com.fhit.ycall.service.YCallService;
 import com.fhit.ycall.service.YCallService.HttpBinder;
@@ -23,7 +27,7 @@ public class BaseActivity extends FragmentActivity {
 	private Intent service;
 	private Boolean isBind;
 	private Dialog mDialog ;
-	ServiceConnection conn = new ServiceConnection() {
+	private ServiceConnection conn = new ServiceConnection() {
 		
 		@Override
 		public void onServiceDisconnected(ComponentName name) {
@@ -46,6 +50,20 @@ public class BaseActivity extends FragmentActivity {
 			mHttpBinder = (HttpBinder)service;
 		}
 	};
+	@SuppressLint("HandlerLeak") 
+	public class BaseHandler extends Handler{
+
+		@Override
+		public void handleMessage(Message msg) {
+			// TODO Auto-generated method stub
+			super.handleMessage(msg);
+			if(msg.what == ApiClient.NETWOERK_EXCEPTION){
+				((AppException)msg.obj).makeToast(getApplication());
+				dismissDialog();
+			}
+		}
+		
+	}
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub

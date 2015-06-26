@@ -19,5 +19,6 @@
 	        android:text="@string/no_search"
 	        android:textColor="@color/no_info"
 	        android:textSize="@dimen/no_info_font_size"/>
+	    <include layout="@layout/xlistview"/>
 	</RelativeLayout>
 </LinearLayout>

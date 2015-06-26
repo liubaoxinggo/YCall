@@ -8,7 +8,7 @@ import android.content.Context;
  *
  */
 public class TApplication extends Application {
-
+	
 	public static Context AppContext;
 	@Override
 	public void onCreate() {

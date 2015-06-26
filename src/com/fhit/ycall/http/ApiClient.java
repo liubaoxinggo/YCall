@@ -12,6 +12,10 @@ import com.fhit.ycall.util.ThreadPoolManager;
 
 public class ApiClient {
 
+	/**
+	 * Õ¯¬Á“Ï≥£what
+	 */
+	public static final int NETWOERK_EXCEPTION = 0x123;
 	private static ApiClient mApiClient;
 	public ApiClient() {
 		super();
@@ -26,7 +30,7 @@ public class ApiClient {
 		}
 		return mApiClient;
 	}
-	private void handleHandler(Handler handler,int what,HttpResponseResult mHttpResponse){
+	private void handleHandler(Handler handler,int what,Object mHttpResponse){
 		if(handler != null){
 			Message msg = handler.obtainMessage(what);
 			msg.obj = mHttpResponse;
@@ -55,10 +59,11 @@ public class ApiClient {
 					if(mHttpResponse != null){
 						handleHandler(handler, what, mHttpResponse);
 						handleContext(mContext, action, mHttpResponse);
-						LogUtil.i("ycall", "ApiClient getObject-url = "+pUrl+":"+mHttpResponse.toString());
+						LogUtil.i("ycall", "ApiClient getObject-url = "+pUrl+" - HttpResponseResult : "+mHttpResponse.toString());
 					}else{
 					}
 				} catch (Exception e) {
+					handleHandler(handler, NETWOERK_EXCEPTION, e);
 					LogUtil.eSave("ycall", "ApiClient getObject “Ï≥£ "+pUrl, e.fillInStackTrace());
 				} 
  
@@ -79,13 +84,13 @@ public class ApiClient {
 					if(mHttpResponse != null){
 						handleHandler(handler, what, mHttpResponse);
 						handleContext(mContext, action, mHttpResponse);
-						LogUtil.i("ycall", "ApiClient postObject-url = "+pUrl+":"+mHttpResponse.toString());
+						LogUtil.i("ycall", "ApiClient postObject-url = "+pUrl+" - HttpResponseResult : "+mHttpResponse.toString());
 					}else{
 					}
 				} catch (Exception e) {
+					handleHandler(handler, NETWOERK_EXCEPTION, e);
 					LogUtil.eSave("infos", "ApiClient postObject “Ï≥£ "+pUrl, e.fillInStackTrace());
 				} 
-				
 			}
 		});
 	}

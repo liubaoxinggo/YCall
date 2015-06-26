@@ -50,11 +50,25 @@ public class YCallService extends Service {
 		LogUtil.eSave("ycall", "YCallService---onDestroy()");
 	}
 	public class HttpBinder extends Binder{
+		/**
+		 * »ñÈ¡ÑéÖ¤Âë
+		 * @param handler
+		 * @param what
+		 * @param cellphone
+		 */
 		public void getVerifyCode(Handler handler,int what,String cellphone){
 			Map<String, Object> params = new HashMap<String, Object>();
 			params.put("cellphone", cellphone);
 			ApiClient.getInstence().getObject(handler,what, URLs.VerifyCode, params);
 		}
+		/**
+		 * ×¢²á
+		 * @param handler
+		 * @param what
+		 * @param cellphone
+		 * @param password
+		 * @param verifyCode
+		 */
 		public void register(Handler handler,int what,String cellphone,String password,String verifyCode){
 			RegisterUser ru = new RegisterUser();
 			ru.setCellphone(cellphone);
@@ -62,11 +76,29 @@ public class YCallService extends Service {
 			ru.setVerifyCode(verifyCode);
 			ApiClient.getInstence().postObject(handler, what, URLs.User, ru.toGsonString());
 		}
+		/**
+		 * µÇÂ¼
+		 * @param handler
+		 * @param what
+		 * @param cellphone
+		 * @param password
+		 */
 		public void login(Handler handler,int what,String cellphone,String password){
 			Map<String, Object> params = new HashMap<String, Object>();
-			params.put("Cellphone", cellphone);
-			params.put("Password", cellphone);
+			params.put("username", cellphone);
+			params.put("password", password);
 			ApiClient.getInstence().getObject(handler,what, URLs.User, params);
+		}
+		/**
+		 * ËÑË÷
+		 * @param handler
+		 * @param what
+		 * @param searchTag
+		 */
+		public void search(Handler handler,int what,String searchTag){
+			Map<String, Object> params = new HashMap<String, Object>();
+			params.put("tags", searchTag);
+			ApiClient.getInstence().getObject(handler,what, URLs.Enterprise, params);
 		}
 	}
 }

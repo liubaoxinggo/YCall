@@ -4,7 +4,6 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.httpclient.HttpStatus;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.database.ContentObserver;
 import android.net.Uri;
@@ -23,16 +22,19 @@ import android.widget.TextView;
 import com.fhit.ycall.BaseActivity;
 import com.fhit.ycall.R;
 import com.fhit.ycall.Observer.SmsObserver;
+import com.fhit.ycall.http.ApiClient;
+import com.fhit.ycall.http.AppException;
 import com.fhit.ycall.http.HttpResponseResult;
+import com.fhit.ycall.util.ConfigUtil;
 import com.fhit.ycall.util.FunctionUtil;
 import com.fhit.ycall.util.LogUtil;
 import com.fhit.ycall.util.StringUtil;
 import com.fhit.ycall.util.ToastUtil;
 
 public class RegisterActivity extends BaseActivity {
-	private static final int Get_Verify_Code = 1;
-	private static final int Verify_Code = 2;
-	private static final int To_Register = 3;
+	private static final int Get_Verify_Code = 0x101;
+	private static final int Verify_Code = 0x102;
+	private static final int To_Register = 0x103;
 	private ContentObserver mObserver;
 	//узуж╡Ц
 	private View floatingLayer;
@@ -41,8 +43,7 @@ public class RegisterActivity extends BaseActivity {
 	
 	private TextView popTvPhone;
 	
-	private Dialog mDialog;
-	private Handler handler = new Handler(){
+	private Handler handler = new BaseHandler(){
 
 		@Override
 		public void handleMessage(Message msg) {
@@ -50,8 +51,8 @@ public class RegisterActivity extends BaseActivity {
 			super.handleMessage(msg);
 			switch (msg.what) {
 			case Get_Verify_Code:
-				HttpResponseResult mHttpResponseResultA = (HttpResponseResult) msg.obj;
 				dismissDialog();
+				HttpResponseResult mHttpResponseResultA = (HttpResponseResult) msg.obj;
 				floatingLayer.setVisibility(View.GONE);
 				if(mHttpResponseResultA != null){
 					if(mHttpResponseResultA.getStatusCode() == HttpStatus.SC_NO_CONTENT 
@@ -68,12 +69,14 @@ public class RegisterActivity extends BaseActivity {
 				ToastUtil.showLongToast(getResourceString(R.string.register_toast_has_get_sms_verify_code));
 				break;
 			case To_Register:
-				HttpResponseResult mHttpResponseResultB = (HttpResponseResult) msg.obj;
 				dismissDialog();
+				HttpResponseResult mHttpResponseResultB = (HttpResponseResult) msg.obj;
 				floatingLayer.setVisibility(View.GONE);
 				if(mHttpResponseResultB != null){
 					if(mHttpResponseResultB.getStatusCode() == HttpStatus.SC_NO_CONTENT){
 						ToastUtil.showLongToast(getResourceString(R.string.register_toast_ok));
+						ConfigUtil.getInstance().setConfigString("phone", etPhone.getText().toString());
+						ConfigUtil.getInstance().setConfigString("password", etPwd.getText().toString());
 						goToLogin();
 					}else{
 						ToastUtil.showLongToast(mHttpResponseResultB.getErrorMsg());
@@ -82,13 +85,10 @@ public class RegisterActivity extends BaseActivity {
 				break;
 			}
 		}
-		
 	};
 	private void goToLogin(){
-		Intent login = new Intent(this, LoginActivity.class);
-		login.putExtra("phone", etPhone.getText().toString());
-		login.putExtra("password", etPwd.getText().toString());
-		startActivity(login);
+		Intent loginIntent = new Intent(this, LoginActivity.class);
+		startActivity(loginIntent);
 		finish();
 	}
 	@Override
@@ -128,6 +128,9 @@ public class RegisterActivity extends BaseActivity {
 		((Button)findViewById(R.id.register_get_sms_verification_code)).setOnClickListener(getSmsVrifyCodeListener);
 		((Button)findViewById(R.id.cancle)).setOnClickListener(cancleListener);
 		((Button)findViewById(R.id.confirm)).setOnClickListener(okListener);
+		
+//		 etPhone.setText("18612014089");
+//		 etPwd.setText("123456");
 	}
 	@Override
 	public void onBackPressed() {
@@ -151,6 +154,7 @@ public class RegisterActivity extends BaseActivity {
 				mHttpBinder.register(handler, To_Register, cellphone, password, verifyCode);
 				showDialog(getResourceString(R.string.register_dialog_registing));
 			}
+//			goToLogin();
 		}
 	};
 	private  OnClickListener getSmsVrifyCodeListener = new OnClickListener() {
