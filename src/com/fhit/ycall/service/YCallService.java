@@ -3,17 +3,17 @@ package com.fhit.ycall.service;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.fhit.ycall.entity.LoginUser;
-import com.fhit.ycall.entity.RegisterUser;
-import com.fhit.ycall.http.ApiClient;
-import com.fhit.ycall.http.URLs;
-import com.fhit.ycall.util.LogUtil;
-
 import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
+
+import com.fhit.ycall.entity.RegisterUser;
+import com.fhit.ycall.http.ApiClient;
+import com.fhit.ycall.http.URLs;
+import com.fhit.ycall.util.LogUtil;
+import com.fhit.ycall.util.ThreadPoolManager;
 
 public class YCallService extends Service {
 
@@ -100,7 +100,58 @@ public class YCallService extends Service {
 			params.put("tags", searchTag);
 			ApiClient.getInstence().getObject(handler,what, URLs.Enterprise, params);
 		}
+		/**
+		 * 关注企业
+		 * @param handler
+		 * @param what
+		 * @param starId
+		 */
+		public void star(Handler handler,int what,int starId){
+			Map<String, Object> params = new HashMap<String, Object>();
+			params.put("starId", starId);
+			ApiClient.getInstence().getObject(handler,what, URLs.Enterprise, params);
+		}
+		/**
+		 * 取消关注企业
+		 * @param handler
+		 * @param what
+		 * @param starId
+		 */
+		public void unstarId(Handler handler,int what,int unstarId){
+			Map<String, Object> params = new HashMap<String, Object>();
+			params.put("unstarId", unstarId);
+			ApiClient.getInstence().getObject(handler,what, URLs.Enterprise, params);
+		}
+		/**
+		 * 关注企业
+		 * @param handler
+		 * @param what
+		 * @param starId
+		 */
+		public void call(Handler handler,int what,int uid){
+			Map<String, Object> params = new HashMap<String, Object>();
+			params.put("uid", uid);
+			ApiClient.getInstence().getObject(handler,what, URLs.Enterprise, params);
+		}
+		public void test(){
+			ThreadPoolManager.getInstance().addTask(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					while(true){
+						LogUtil.i("ycall", "测试 n = "+(n++));
+						try {
+							Thread.sleep(3000);
+						} catch (InterruptedException e) {
+							LogUtil.i("ycall", "测试 n = "+(n)+" / 异常："+e.getLocalizedMessage());
+						}
+					}
+				}
+			});
+		}
 	}
+	static long n = 0;
 }
 
 

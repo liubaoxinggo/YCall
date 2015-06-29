@@ -6,13 +6,18 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Service;
 import android.content.Context;
+import android.content.Intent;
+import android.media.AudioManager;
 import android.os.Build;
 import android.os.Vibrator;
+import android.telephony.TelephonyManager;
 import android.text.InputType;
-import android.view.View;
+import android.view.KeyEvent;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+
+import com.android.internal.telephony.ITelephony;
 /**
  * 系统功能辅助实现
  * @author liubaoxing
@@ -79,7 +84,77 @@ public class FunctionUtil {
 			((Vibrator)mContext.getSystemService(Service.VIBRATOR_SERVICE)).vibrate(pattern, repeat);
 		}
 	}
-	
+	/**
+	 * 扬声器是否发开
+	 * @param mContext
+	 * @return
+	 */
+	public static boolean getSpeakerState(Context mContext){
+		
+		return ((AudioManager)mContext.getSystemService(Context.AUDIO_SERVICE)).isSpeakerphoneOn();
+	}
+	/**
+	 * 打开扬声器
+	 * @param mContext
+	 */
+	public static void openSpeaker(Context mContext){
+		((AudioManager)mContext.getSystemService(Context.AUDIO_SERVICE)).setSpeakerphoneOn(true);
+	}
+	/**
+	 * 关闭扬声器
+	 * @param mContext
+	 */
+	public static void closeSpeaker(Context mContext){
+		((AudioManager)mContext.getSystemService(Context.AUDIO_SERVICE)).setSpeakerphoneOn(false);
+	}
+	//返回TelephonyManager的ITelephony接口私有化对象实例
+	private static  ITelephony getITelephony(TelephonyManager telMgr)
+			throws Exception {
+		Method getITelephonyMethod = telMgr.getClass().getDeclaredMethod(
+				"getITelephony");
+		getITelephonyMethod.setAccessible(true);// 私有化函数也能使用
+		return (ITelephony) getITelephonyMethod.invoke(telMgr);
+	}
+	/**
+	 * 挂断电话
+	 * @param telMgr
+	 * @throws Exception
+	 */
+	public static void  endCall(TelephonyManager telMgr) throws Exception{
+		getITelephony(telMgr).endCall();
+	} 
+	/**
+	 * 挂断电话
+	 * @param telMgr
+	 * @throws Exception
+	 */
+	public static void  endCall(Context mContext) throws Exception{
+		getITelephony((TelephonyManager)mContext.getSystemService(Context.TELEPHONY_SERVICE)).endCall();
+	} 
+	/**
+	 * 接听电话
+	 * @param mContext
+	 */
+	public static void answerCall(Context mContext){
+		try {
+			getITelephony((TelephonyManager)mContext.getSystemService(Context.TELEPHONY_SERVICE)).answerRingingCall();;
+		} catch (Exception e) {
+			LogUtil.e("ycall", "FunctionUtil answerCall 异常【1】",e.getCause());
+			try {
+				Intent intent = new Intent(Intent.ACTION_MEDIA_BUTTON);
+				KeyEvent keyEvent = new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_HEADSETHOOK);
+				intent.putExtra(Intent.EXTRA_KEY_EVENT,keyEvent);
+				//在android4.1系统以后， 这个权限只允许系统app使用
+				mContext.sendOrderedBroadcast(intent,"android.permission.CALL_PRIVILEGED");
+			} catch (Exception e2) {
+				LogUtil.e("ycall", "FunctionUtil answerCall 异常【2】",e.getCause());
+				Intent meidaButtonIntent = new Intent(Intent.ACTION_MEDIA_BUTTON); 
+                KeyEvent keyEvent = new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_HEADSETHOOK); 
+                meidaButtonIntent.putExtra(Intent.EXTRA_KEY_EVENT,keyEvent); 
+                mContext.sendOrderedBroadcast(meidaButtonIntent, null); 
+			}
+		}
+	}
 }
 
 

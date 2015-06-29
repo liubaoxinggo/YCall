@@ -13,8 +13,10 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.support.v4.app.FragmentActivity;
-import com.fhit.ycall.http.ApiClient;
+
+import com.fhit.ycall.activity.WebActivity;
 import com.fhit.ycall.http.AppException;
+import com.fhit.ycall.http.BaseApiClient;
 import com.fhit.ycall.http.URLs;
 import com.fhit.ycall.service.YCallService;
 import com.fhit.ycall.service.YCallService.HttpBinder;
@@ -57,7 +59,7 @@ public class BaseActivity extends FragmentActivity {
 		public void handleMessage(Message msg) {
 			// TODO Auto-generated method stub
 			super.handleMessage(msg);
-			if(msg.what == ApiClient.NETWOERK_EXCEPTION){
+			if(msg.what == BaseApiClient.NETWOERK_EXCEPTION){
 				((AppException)msg.obj).makeToast(getApplication());
 				dismissDialog();
 			}
@@ -131,10 +133,23 @@ public class BaseActivity extends FragmentActivity {
 			LogUtil.i("ycall",this.getLocalClassName()+" 解除绑定 "+"-----"+Thread.currentThread());
 			this.unbindService(conn);
 			isBind = false;
-			mHttpBinder = null;
+			mHttpBinder = null;  
 		}else{
 			LogUtil.i("ycall",this.getLocalClassName()+" 未绑定，无法解除绑定 "+"-----"+Thread.currentThread());
 		}
+	}
+	public void goToWeb(String url,String title){
+		Intent webIntent = new Intent(getApplicationContext(), WebActivity.class);
+		webIntent.putExtra(WebActivity.LOAD_URL, url);
+		webIntent.putExtra(WebActivity.LOAD_TITLE, title);
+		startActivity(webIntent);
+	}
+	public void goToWeb(String url,String title,int from){
+		Intent webIntent = new Intent(getApplicationContext(), WebActivity.class);
+		webIntent.putExtra(WebActivity.LOAD_URL, url);
+		webIntent.putExtra(WebActivity.LOAD_TITLE, title);
+		webIntent.putExtra(WebActivity.LOAD_FROM, from);
+		startActivity(webIntent);
 	}
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {

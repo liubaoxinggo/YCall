@@ -1,6 +1,7 @@
 package com.fhit.ycall.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -17,6 +18,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.fhit.ycall.R;
+import com.fhit.ycall.activity.CallActivity;
 import com.fhit.ycall.activity.MainActivity;
 import com.fhit.ycall.util.DTMFUtil;
 import com.fhit.ycall.util.FunctionUtil;
@@ -241,7 +243,9 @@ public class HistoryFragment extends HistoryBaseFragment implements OnClickListe
 	}
 	@Override
 	public void call() {
-		ToastUtil.showLongToast("call");
+//		ToastUtil.showLongToast("call");
+		Intent callIntent = new Intent(mContext, CallActivity.class);
+		mContext.startActivity(callIntent);
 	}
 	@Override
 	public void hideKeyboard(long duration){

@@ -2,11 +2,14 @@ package com.fhit.ycall.http;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URL;
 import java.util.Map;
 
 import org.apache.commons.httpclient.DefaultHttpMethodRetryHandler;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
+import org.apache.commons.httpclient.URI;
+import org.apache.commons.httpclient.URIException;
 import org.apache.commons.httpclient.methods.DeleteMethod;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
@@ -14,6 +17,7 @@ import org.apache.commons.httpclient.methods.PutMethod;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.apache.commons.httpclient.protocol.Protocol;
 
+import android.net.Uri;
 import android.util.Base64;
 
 import com.fhit.ycall.util.ConfigUtil;
@@ -55,9 +59,13 @@ public class HttpHelper {
 	 
 		return mHttpClient;
 	}	
-	private static GetMethod getHttpGet(String url, String cookie, String userAgent) {
+	@SuppressWarnings("deprecation")
+	private static GetMethod getHttpGet(String url, String cookie, String userAgent) throws URIException {
 		GetMethod httpGet = new GetMethod();
-		httpGet.setPath(url);
+		//若是url里包含中文会报异常org.apache.commons.httpclient.URIException: Invalid query
+//		httpGet.setPath(url);/
+		//url里可以包含中文
+		httpGet.setURI(new URI(url, UTF_8));
 		// 设置 请求超时时间
 		httpGet.getParams().setSoTimeout(TIMEOUT_SOCKET);
 		String Authorization = ConfigUtil.getInstance().getConfigString("authorization");

@@ -1,24 +1,23 @@
 package com.fhit.ycall.fragment;
 
-import com.fhit.ycall.R;
-
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.RelativeLayout;
 
-@SuppressLint("ResourceAsColor") public class DiscoveryFragment extends Fragment {
+import com.fhit.ycall.R;
+import com.fhit.ycall.activity.WebActivity;
 
-	Context mContext;
+@SuppressLint("ResourceAsColor") 
+public class DiscoveryFragment extends BaseFragment {
+
+	private final static String GAME_URL = "http://app100668422.imgcache.qzoneapp.com/app100668422/wxgames/index4.html";
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		mContext = this.getActivity();
 	}
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,6 +32,17 @@ import android.widget.TextView;
 		
 	}
 	private void addListener(View view) {
-		
+		((RelativeLayout)view.findViewById(R.id.rl_op_1)).setOnClickListener(this);
+	}
+	@Override
+	public void onClick(View v) {
+		super.onClick(v);
+		switch (v.getId()) {
+		case R.id.rl_op_1://сно╥
+			goToWeb(GAME_URL, getResourceString(R.string.game),WebActivity.FROM_GAME);
+			break;
+		default:
+			break;
+		}
 	}
 }

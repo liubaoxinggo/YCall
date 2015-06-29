@@ -8,6 +8,7 @@
 	    android:layout_width="match_parent"
 	    android:layout_height="match_parent"
 	    android:orientation="vertical">
+	    <include layout="@layout/xlistview"/>
 	    <TextView
 	        android:id="@+id/no_search_flag" 
 	        android:layout_width="wrap_content"
@@ -19,6 +20,5 @@
 	        android:text="@string/no_search"
 	        android:textColor="@color/no_info"
 	        android:textSize="@dimen/no_info_font_size"/>
-	    <include layout="@layout/xlistview"/>
 	</RelativeLayout>
 </LinearLayout>

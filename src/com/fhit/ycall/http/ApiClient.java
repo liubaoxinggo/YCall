@@ -10,12 +10,9 @@ import com.fhit.ycall.util.LogUtil;
 import com.fhit.ycall.util.ThreadPoolManager;
 
 
-public class ApiClient {
+public class ApiClient extends BaseApiClient{
 
-	/**
-	 * Õ¯¬Á“Ï≥£what
-	 */
-	public static final int NETWOERK_EXCEPTION = 0x123;
+	
 	private static ApiClient mApiClient;
 	public ApiClient() {
 		super();

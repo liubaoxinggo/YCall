@@ -11,6 +11,10 @@
     <color name="theme_green_1">#37B34A</color>
     <!-- 按钮按下时的绿色 -->
     <color name="btn_bg_press">#329B3E</color>
+    
+    <color name="btn_bg_normal_1">#dddddd</color>
+    <color name="btn_bg_press_1">#cccccc</color>
+    
     <!-- 遮盖层 -->
     <color name="floating_layer">#cc333333</color>
     
@@ -31,8 +35,10 @@
     
     <color name="relationship_tv">#666666</color>
     
+    <color name="call_system_info">#96F2A5</color>
     
     
+    <!-- 中间内容的背景色 -->
     <color name="center_content_bg">#eeeeee</color>
     <color name="tab">#ffffff</color>
     <!-- 分割线 的颜色 -->
@@ -40,11 +46,13 @@
     
     
     <color name="c_ffffffff">#ffffffff</color>
+    <color name="c_00000000">#ff000000</color>
     <color name="c_aa0000">#aa0000</color>
     <color name="c_f6f6f6">#f6f6f6</color>
     <color name="c_f5f5f5">#f5f5f5</color>
     <color name="c_333333">#333333</color>
     <color name="c_666666">#666666</color>
+    <color name="c_999999">#999999</color>
     <color name="c_dddddd">#dddddd</color>
     <!-- 弹出loading背景色 -->
     <color name="loading_dialog_bg">#99000000</color>

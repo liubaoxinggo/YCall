@@ -1,27 +1,20 @@
 package com.fhit.ycall.fragment;
 
-import com.fhit.ycall.R;
-import com.fhit.ycall.util.ToastUtil;
-
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnClickListener;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
-public class MeFragment extends Fragment implements OnClickListener{
+import com.fhit.ycall.R;
+import com.fhit.ycall.util.ToastUtil;
 
-	Context mContext;
+public class MeFragment extends BaseFragment{
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		mContext = this.getActivity();
 	}
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,

@@ -18,7 +18,7 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:scaleType="centerInside"
-	        android:src="@drawable/no_friend"/>
+	        android:src="@drawable/no_attention_to_business"/>
 	    <TextView 
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"

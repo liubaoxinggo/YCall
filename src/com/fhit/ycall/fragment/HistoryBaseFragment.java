@@ -1,8 +1,7 @@
 package com.fhit.ycall.fragment;
 
-import android.support.v4.app.Fragment;
 
-public abstract class HistoryBaseFragment extends Fragment {
+public abstract class HistoryBaseFragment extends BaseFragment {
 
 	/**
 	 * Òş²Ø¼üÅÌ

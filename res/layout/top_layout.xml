@@ -20,7 +20,7 @@
 	    android:layout_centerVertical="true"
 	    android:scaleType="centerInside"
 	    android:src="@drawable/nav_search"
-	    android:background="@drawable/btn_bg_3"
+	    android:background="@drawable/btn_bg_2"
 	    android:visibility="invisible"/>
     <Button
 	    android:id="@+id/top_right_btn"
@@ -57,7 +57,7 @@
         android:singleLine="true"
         android:hint="@string/top_search_hint"
         android:textColorHint="@color/input_num_hint"
-        android:textCursorDrawable="@null"
+        android:textCursorDrawable="@color/theme_green_1"
 		android:cursorVisible="true"
         android:paddingTop="6dp"
         android:paddingBottom="6dp"

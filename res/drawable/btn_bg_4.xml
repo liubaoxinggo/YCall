@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--有圆角 并 设置了padding -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#ffffff" />
+		    <!-- 描边 -->
+		    <stroke android:width="0px" android:color="#00558E" />
+		    <!-- 圆角 -->
+		    <corners android:radius="5dp"/>
+		    <!-- 渐变 -->
+		    <gradient
+		        android:startColor="@color/btn_bg_press"
+		        android:endColor="@color/btn_bg_press"
+		        android:angle="90"/>
+		    <padding
+		         android:left="0dp" 
+		         android:top="0dp"
+		         android:right="0dp" 
+		         android:bottom="0dp" />
+        </shape>
+    </item>
+    <item android:state_pressed="false">
+        <shape android:shape="rectangle">
+            <solid android:color="#ffffff" />
+		    <!-- 描边 -->
+		    <stroke android:width="0px" android:color="#476493" />
+		    <!-- 圆角 -->
+		    <corners android:radius="5dp"/>
+		    <!-- 渐变 -->
+		    <gradient
+		        android:startColor="@color/top_bg"
+		        android:endColor="@color/top_bg"
+		        android:angle="90"/>
+		   <padding
+		         android:left="0dp" 
+		         android:top="0dp"
+		         android:right="0dp" 
+		         android:bottom="0dp" />
+        </shape>
+    </item>
+
+</selector>

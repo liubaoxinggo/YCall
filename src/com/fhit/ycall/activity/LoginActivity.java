@@ -42,6 +42,8 @@ public class LoginActivity extends BaseActivity {
 				if(mHttpResponseResultA != null){
 					if(mHttpResponseResultA.getStatusCode() == HttpStatus.SC_NO_CONTENT 
 							|| mHttpResponseResultA.getStatusCode() == HttpStatus.SC_OK){
+						ConfigUtil.getInstance().setConfigString("phone", etPhone.getText().toString());
+						ConfigUtil.getInstance().setConfigString("password", etPwd.getText().toString());
 						HttpHelper.setAuthorization(etPhone.getText().toString(), etPwd.getText().toString());
 						goToMain();
 					}else{
@@ -60,46 +62,52 @@ public class LoginActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.login);
 		bindService();
+		setContentView(R.layout.login);
 		initView();
-		LogUtil.i("infos", this.getLocalClassName()+"--onCreate()");
+		LogUtil.i("ycall", this.getLocalClassName()+"--onCreate()");
 	}
 	@Override
 	protected void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();
-		LogUtil.i("infos", this.getLocalClassName()+"--onStart()");
+		LogUtil.i("ycall", this.getLocalClassName()+"--onStart()");
 		initData();
 	}
 	@Override
 	protected void onRestart() {
 		// TODO Auto-generated method stub
-		LogUtil.i("infos", this.getLocalClassName()+"--onRestart()");
+		LogUtil.i("ycall", this.getLocalClassName()+"--onRestart()");
 		super.onRestart();
 	}
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
-		LogUtil.i("infos", this.getLocalClassName()+"--onResume()");
+		LogUtil.i("ycall", this.getLocalClassName()+"--onResume()");
 		super.onResume();
+	}
+	@Override
+	public void onWindowFocusChanged(boolean hasFocus) {
+		// TODO Auto-generated method stub
+		super.onWindowFocusChanged(hasFocus);
+		LogUtil.i("ycall", this.getLocalClassName()+"--onWindowFocusChanged():hasFocus = "+hasFocus);
 	}
 	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub
-		LogUtil.i("infos", this.getLocalClassName()+"--onPause()");
+		LogUtil.i("ycall", this.getLocalClassName()+"--onPause()");
 		super.onPause();
 	}
 	@Override
 	protected void onStop() {
-		LogUtil.i("infos", this.getLocalClassName()+"--onStop()");
+		LogUtil.i("ycall", this.getLocalClassName()+"--onStop()");
 		// TODO Auto-generated method stub
 		super.onStop();
 	}
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
-		LogUtil.i("infos", this.getLocalClassName()+"--onDestroy()");
+		LogUtil.i("ycall", this.getLocalClassName()+"--onDestroy()");
 		super.onDestroy();
 		unBindService();
 	}
@@ -134,7 +142,6 @@ public class LoginActivity extends BaseActivity {
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
-//			finish();
 		}
 	};
 	private  OnClickListener goToLoginListener = new OnClickListener() {

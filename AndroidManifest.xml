@@ -13,8 +13,9 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 	<!-- 读取短信 -->
     <uses-permission android:name="android.permission.READ_SMS"/>
-    <!--  -->
-    <uses-permission android:name="android.permission.WRITE_SMS"/>
+    <!-- 打开/关闭扬声器 -->
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    
     <application
         android:name="com.fhit.ycall.TApplication"
         android:allowBackup="true"
@@ -38,6 +39,10 @@
         <activity android:name=".activity.InternetPhoneBookActivity"  android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.FriendActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.AttentionBusinessActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.CallActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.WebActivity" android:screenOrientation="portrait"></activity>
+        
+        
         <service android:name="com.fhit.ycall.service.YCallService"></service>
     </application>
 

@@ -46,10 +46,14 @@
     
     <string name="top_msg">消息</string>
     <string name="top_search">搜索</string>
+    <string name="details">详情</string>
     
     <string name="top_search_hint">请输入企业名称</string>
     <string name="toast_search">请输入企业名称</string>
     <string name="dialog_searching">搜索中</string>
+    <string name="toast_no_search_result">没有搜索到结果</string>
+    <string name="toast_star_ok">关注成功</string>
+    <string name="toast_unstar_ok">取消关注成功</string>
     
     <string name="add_attention">+关注</string>
     <string name="delete_attention">取消关注</string>
@@ -81,6 +85,12 @@
     <string name="no_internet_phone_book">暂无任何联系人</string>
     <string name="no_internet_phone_book_hint">请上传手机通讯录到网络电话本</string>
     <string name="upload">上传</string>
+    
+    <string name="call_state_ing_1">呼叫中</string>
+    <string name="call_state_ing_2">通话中</string>
+    <string name="call_mt">免提</string>
+    <string name="call_gj">挂机</string>
+    <string name="call_system_info">等待系统电话回呼</string>
 	
     
     
