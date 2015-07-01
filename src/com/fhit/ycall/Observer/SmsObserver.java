@@ -55,8 +55,8 @@ public class SmsObserver extends ContentObserver {
 		if(cursor != null && cursor.moveToFirst()){
 			 String address = cursor.getString(cursor.getColumnIndex("address"));  
 	         String content = cursor.getString(cursor.getColumnIndex("body"));
-	         LogUtil.iSave("ycall", " SmsObserver from :"+address +" | content:"+content);
-//	         06-25 21:11:33.312: I/ycall(15584):  SmsObserver from :10690275402375 | content:【北京峰华】您的验证码是:424471
+//	         06-25 21:11:33.312: I/ycall(15584):SmsObserver from :10690275402375 | content:【北京峰华】您的验证码是:424471
+	         LogUtil.iSave("ycall", "SmsObserver from :"+address +" | content:"+content);
 	         if(address.endsWith(OBSERVER_NUMBER_1) || address.endsWith(OBSERVER_NUMBER_2)
 	        		 ||content.contains("北京峰华")){
 	        	 Message msg = handler.obtainMessage(what);

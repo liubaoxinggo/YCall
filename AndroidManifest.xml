@@ -15,6 +15,8 @@
     <uses-permission android:name="android.permission.READ_SMS"/>
     <!-- 打开/关闭扬声器 -->
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    <!-- 挂断电话 -->
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
     
     <application
         android:name="com.fhit.ycall.TApplication"

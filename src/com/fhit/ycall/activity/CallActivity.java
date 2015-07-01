@@ -117,8 +117,8 @@ public class CallActivity extends BaseActivity implements OnClickListener,Sensor
 	}
 	private void handleEndCall() {
 		try {
+			FunctionUtil.endCall(getBaseContext());
 			if(telephonyState == TelephonyManager.CALL_STATE_OFFHOOK){
-				FunctionUtil.endCall(getBaseContext());;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

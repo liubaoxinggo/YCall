@@ -17,11 +17,6 @@ import android.widget.TextView;
 
 import com.fhit.ycall.BaseActivity;
 import com.fhit.ycall.R;
-import com.fhit.ycall.R.color;
-import com.fhit.ycall.R.drawable;
-import com.fhit.ycall.R.id;
-import com.fhit.ycall.R.layout;
-import com.fhit.ycall.R.string;
 import com.fhit.ycall.adapter.TabPagerAdapter;
 import com.fhit.ycall.customview.MViewPager;
 import com.fhit.ycall.fragment.DiscoveryFragment;
@@ -191,11 +186,9 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 			setCurrentTab(INDEX_RELATIONSHIP);
 			break;
 		case R.id.tab_iv_keyboard://原
-//			ToastUtil.showShortToast("原");
 			handleClickKeyboardTab();
 			break;
 		case R.id.tab_iv_keyboard_1://副
-//			ToastUtil.showShortToast("副");
 			setCurrentTab(INDEX_KEYBOARD);
 			break;
 		case R.id.tab_3:
@@ -208,7 +201,6 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 			ToastUtil.showShortToast(getResources().getString(R.string.top_msg)); 
 			break;
 		case R.id.top_right_search://右上角 search
-//			ToastUtil.showShortToast(getResources().getString(R.string.top_search));
 			startActivity(new Intent(this, SearchActivity.class));
 			break;
 		default:
@@ -239,7 +231,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 			history.call();
 			break;
 		}
-		LogUtil.i("infos", "MainActivity: currentKeyboardState[1] = "+ stateTemp+"--->"+currentKeyboardState);
+		LogUtil.i("ycall", "MainActivity: currentKeyboardState[1] = "+ stateTemp+"--->"+currentKeyboardState);
 	}
 	/**
 	 * 设置keyTab的图片，及图片动画
@@ -286,7 +278,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 		default:
 			break;
 		}
-		LogUtil.i("infos", "MainActivity: currentKeyboardState[2] = "+ currentKeyboardState+"--->"+state);
+		LogUtil.i("ycall", "MainActivity: currentKeyboardState[2] = "+ currentKeyboardState+"--->"+state);
 		currentKeyboardState = state;
 	}
 	/**
@@ -396,7 +388,6 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 	 * 设置选中的Tab
 	 * @param cIndex 
 	 */
-	@SuppressLint("ResourceAsColor")
 	private void setCurrentTab(int cIndex){
 		if(cIndex != INDEX_KEYBOARD){//当选中的不是键盘Tab时，副本显示
 			ivKeyboard_1.setVisibility(View.VISIBLE);
